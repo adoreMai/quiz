@@ -20,5 +20,28 @@
     "profession": "",
     "questionCount": 124,
     "chapters": 9
+  },
+  {
+    "id": "明德英语B2",
+    "name": "明德英语B2",
+    "shortName": "明德英语B2",
+    "file": "subjects/明德英语B2.json",
+    "author": "",
+    "university": "",
+    "profession": "",
+    "questionCount": 165,
+    "chapters": 5,
+    "examConfig": {
+      "scored": [
+        { "type": "选词填空", "section": "Section A", "count": 1, "score": 10 },
+        { "type": "选词填空", "section": "Section B", "count": 1, "score": 10 },
+        { "type": "选词填空", "section": "Section C", "count": 1, "score": 10 }
+      ],
+      "unscored": [
+        { "type": "汉译英", "count": 1 },
+        { "type": "英译汉", "count": 1 }
+      ],
+      "timeMinutes": 60
+    }
   }
 ]

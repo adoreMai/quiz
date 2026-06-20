@@ -312,12 +312,12 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.1.2';
+const VERSION = '2.2.0';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
 const DEFAULT_SCORES = { '单选题': 2, '多选题': 3, '判断题': 1 };
-const SUBJECTIVE_TYPES = ['简答题', '论述题', '填空题', '古文今译题'];
+const SUBJECTIVE_TYPES = ['简答题', '论述题', '填空题', '古文今译题', '汉译英', '英译汉', '写作'];
 const AI_WARNING = '（AI生成，仅供参考，请以教材为准）';
 const TIME_OPTIONS = [30, 45, 60, 90, 120];
 const STORAGE_KEY = 'quiz_app_data';
@@ -491,6 +491,21 @@ async function loadQuestionBank(url) {
       chMap.push({ name: ch.chapter, questions: chQs });
     }
     questionBank = flat; chapters = chMap;
+    // Shuffle option texts while keeping labels (A/B/C...) in fixed order
+    for (var _i = 0; _i < flat.length; _i++) {
+      var q = flat[_i];
+      if (q.options && q.options.length > 1) {
+        var labels = q.options.map(function(o) { return o.label; });
+        var texts = q.options.map(function(o) { return o.text; });
+        var correctText = q.options.find(function(o) { return o.label === q.answer; }).text;
+        shuffle(texts);
+        for (var _j = 0; _j < q.options.length; _j++) {
+          q.options[_j].label = labels[_j];
+          q.options[_j].text = texts[_j];
+        }
+        q.answer = q.options.find(function(o) { return o.text === correctText; }).label;
+      }
+    }
     // Show prefix legend only if this subject has marked questions
     var hasPrefix = flat.some(function(q) { var c = q.content; return c.startsWith('** ') || c.startsWith('* '); });
     document.getElementById('prefixLegend').style.display = hasPrefix ? '' : 'none';
@@ -530,6 +545,7 @@ function switchMode(mode) {
 // EXAM MODE
 // ============================================================
 function renderExamSetup() {
+  if (currentSubject && currentSubject.examConfig) { renderSubjectExamSetup(); return; }
   const m = document.getElementById('main');
   m.innerHTML = `
     <div class="panel active">
@@ -621,7 +637,57 @@ function renderExamHistoryHTML() {
     </div>`;
 }
 
+function renderSubjectExamSetup() {
+  var cfg = currentSubject.examConfig;
+  var timeMin = cfg.timeMinutes || 60;
+  var totalScore = (cfg.scored || []).reduce(function(s, e) { return s + (e.score || 0) * e.count; }, 0);
+
+  var scoredRows = (cfg.scored || []).map(function(e) {
+    return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;">' +
+      '<span>' + escapeHTML(e.type) + (e.section ? ' (' + escapeHTML(e.section) + ')' : '') + '</span>' +
+      '<span style="color:var(--text2);">' + e.count + '题 × ' + (e.score || '?') + '分 = ' + (e.count * (e.score || 0)) + '分</span>' +
+      '</div>';
+  }).join('');
+
+  var unscoredRows = (cfg.unscored || []).map(function(e) {
+    return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;">' +
+      '<span>' + escapeHTML(e.type) + '</span>' +
+      '<span style="color:var(--text2);">' + e.count + '题（不计分）</span>' +
+      '</div>';
+  }).join('');
+
+  var historyHTML = renderExamHistoryHTML();
+
+  var m = document.getElementById('main');
+  m.innerHTML =
+    '<div class="panel active">' +
+      '<div class="panel-head">模拟考试</div>' +
+      '<p class="panel-sub">从各题型题库中随机抽取题目。翻译与写作题不计分，仅供展示。</p>' +
+      '<div class="card">' +
+        '<div class="setup-grid">' +
+          '<div class="setup-item">' +
+            '<label>考试时间（分钟）</label>' +
+            '<select id="examTimeSelect">' + TIME_OPTIONS.map(function(t) { return '<option value="' + t + '"' + (t === timeMin ? ' selected' : '') + '>' + t + ' 分钟</option>'; }).join('') + '</select>' +
+          '</div>' +
+          '<div class="setup-item">' +
+            '<label>总分</label>' +
+            '<input type="text" id="examTotalScore" value="' + totalScore + '" readonly style="font-weight:700;">' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="card">' +
+        '<div style="font-weight:600;margin-bottom:12px;">题型设置（固定）</div>' +
+        scoredRows + unscoredRows +
+      '</div>' +
+      '<div style="margin-top:20px;">' +
+        '<button class="btn btn-primary" onclick="startExam()" style="font-size:16px;padding:12px 32px;">开始考试</button>' +
+      '</div>' +
+      historyHTML +
+    '</div>';
+}
+
 function startExam() {
+  if (currentSubject && currentSubject.examConfig) { startSubjectExam(); return; }
   const timeMin = parseInt(document.getElementById('examTimeSelect').value);
   const timeSec = timeMin * 60;
   appState.examTotalTime = timeSec;
@@ -694,6 +760,50 @@ function startExam() {
   }
 
   appState.examQuestions = shuffle(selected);
+  renderExamQuestion(0);
+}
+
+function startSubjectExam() {
+  var cfg = currentSubject.examConfig;
+  var timeMin = parseInt(document.getElementById('examTimeSelect').value);
+  var timeSec = timeMin * 60;
+  appState.examTotalTime = timeSec;
+  appState.examTimeLeft = timeSec;
+  appState.examAnswers = {};
+  appState.examSubmitted = false;
+
+  var examScores = {};
+  var examCounts = {};
+  (cfg.scored || []).forEach(function(e) {
+    examScores[e.type] = e.score || 0;
+    examCounts[e.type] = (examCounts[e.type] || 0) + e.count;
+  });
+  appState._examScores = examScores;
+  appState._examCounts = examCounts;
+
+  var selected = [];
+
+  // Extract scored questions: filter by type AND section
+  (cfg.scored || []).forEach(function(entry) {
+    var pool = questionBank.filter(function(q) { return q.type === entry.type; });
+    if (entry.section) {
+      pool = pool.filter(function(q) { return q.section === entry.section; });
+    }
+    if (pool.length === 0) return;
+    var picked = shuffle(pool.slice()).slice(0, entry.count);
+    Array.prototype.push.apply(selected, picked);
+  });
+
+  // Extract unscored questions: filter by type only
+  (cfg.unscored || []).forEach(function(entry) {
+    var pool = questionBank.filter(function(q) { return q.type === entry.type; });
+    if (pool.length === 0) return;
+    var picked = shuffle(pool.slice()).slice(0, entry.count);
+    Array.prototype.push.apply(selected, picked);
+  });
+
+  // Preserve config order (scored first, then unscored); do not shuffle
+  appState.examQuestions = selected;
   renderExamQuestion(0);
 }
 
@@ -859,11 +969,26 @@ function submitExam() {
 
   // Save history
   const now = new Date();
+  var detail;
+  if (currentSubject && currentSubject.examConfig) {
+    var cfg = currentSubject.examConfig;
+    var allEntries = (cfg.scored || []).concat(cfg.unscored || []);
+    var parts = [];
+    allEntries.forEach(function(e) {
+      var label = e.type + (e.section ? '(' + e.section + ')' : '');
+      var totalForType = details.filter(function(d) { return d.q.type === e.type && (!e.section || d.q.section === e.section); }).length;
+      var correctForType = details.filter(function(d) { return d.q.type === e.type && (!e.section || d.q.section === e.section) && d.isCorrect; }).length;
+      if (totalForType > 0) parts.push(label + ' ' + correctForType + '/' + totalForType);
+    });
+    detail = parts.join('  ');
+  } else {
+    detail = '单选' + details.filter(function(d){return d.q.type==='单选题'&&d.isCorrect;}).length + '/' + details.filter(function(d){return d.q.type==='单选题';}).length + ' 多选' + details.filter(function(d){return d.q.type==='多选题'&&d.isCorrect;}).length + '/' + details.filter(function(d){return d.q.type==='多选题';}).length + ' 判断' + details.filter(function(d){return d.q.type==='判断题'&&d.isCorrect;}).length + '/' + details.filter(function(d){return d.q.type==='判断题';}).length;
+  }
   addExamHistory({
-    date: `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`,
-    score: totalScore, correct, total: totalQ,
+    date: now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0') + ' ' + String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0'),
+    score: totalScore, correct: correct, total: totalQ,
     time: appState.examTotalTime > 0 ? Math.floor(appState.examTotalTime/60) : '不限',
-    detail: `单选${details.filter(d=>d.q.type==='单选题'&&d.isCorrect).length}/${details.filter(d=>d.q.type==='单选题').length} 多选${details.filter(d=>d.q.type==='多选题'&&d.isCorrect).length}/${details.filter(d=>d.q.type==='多选题').length} 判断${details.filter(d=>d.q.type==='判断题'&&d.isCorrect).length}/${details.filter(d=>d.q.type==='判断题').length}`,
+    detail: detail,
   });
 
   // Calculate max score
@@ -1009,8 +1134,7 @@ function renderTestOverview() {
               <div class="progress-text" style="margin-bottom:12px;">已完成 ${done}/${total} 题</div>
               <div style="display:flex;gap:8px;flex-wrap:wrap;">
                 <button class="btn btn-sm" onclick="startTestChapter(${ci},null)">全部练习</button>
-                <button class="btn btn-sm" onclick="startTestChapter(${ci},'章节测验')">章节测验</button>
-                <button class="btn btn-sm" onclick="startTestChapter(${ci},'测试题')">测试题</button>
+                ${(()=>{var secs=[...new Set(ch.questions.map(q=>q.section))].filter(Boolean);return secs.map(s=>'<button class="btn btn-sm" onclick="startTestChapter('+ci+',\''+escapeOnclick(s)+'\')">'+escapeHTML(s)+'</button>').join('');})()}
                 ${done>0?`<button class="btn btn-sm btn-err" onclick="resetTestProgress('${escapeOnclick(ch.name)}')">重置进度</button>`:''}
               </div>
             </div>
