@@ -233,7 +233,7 @@ footer a { color:var(--text2); }
       <li>所属大学（可选）</li>
       <li>专业名称（可选）</li>
     </ul>
-    <button class="btn" onclick="document.getElementById('contributeModal').classList.remove('show')" style="width:100%;margin-top:16px;">关闭</button>
+    <button class="btn" onclick="document.getElementById('contributeModal').classList.remove('show')" style="margin:16px auto 0;display:block;">关闭</button>
   </div>
 </div>
 <div class="modal-overlay" id="feedbackModal">
@@ -246,16 +246,19 @@ footer a { color:var(--text2); }
     </div>
     <p style="font-size:13px;color:var(--text2);margin:12px 0;">或通过 GitHub Issues 提交（需登录 GitHub）：</p>
     <a href="https://github.com/adoreMai/quiz/issues/new?title=反馈&labels=反馈" target="_blank" rel="noopener noreferrer" class="btn" style="display:block;text-align:center;width:100%;">前往 GitHub Issues</a>
-    <button class="btn" onclick="document.getElementById('feedbackModal').classList.remove('show')" style="width:100%;margin-top:8px;">关闭</button>
+    <button class="btn" onclick="document.getElementById('feedbackModal').classList.remove('show')" style="margin:8px auto 0;display:block;">关闭</button>
   </div>
 </div>
 <div class="modal-overlay" id="changelogModal">
-  <div class="modal" style="text-align:left;max-width:520px;max-height:80vh;overflow-y:auto;">
-    <h2>公告</h2>
-    <div id="changelogContent" style="font-size:14px;line-height:1.8;margin:12px 0;">
+  <div class="modal" style="text-align:left;max-width:520px;max-height:80vh;display:flex;flex-direction:column;">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-shrink:0;margin-bottom:12px;">
+      <h2 style="margin:0;">公告</h2>
+      <button onclick="document.getElementById('changelogModal').classList.remove('show')" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text2);padding:0 2px;line-height:1;">&times;</button>
+    </div>
+    <div id="changelogContent" style="font-size:14px;line-height:1.8;overflow-y:auto;flex:1;min-height:0;">
       <p style="text-align:center;color:var(--text3);padding:20px;">加载中...</p>
     </div>
-    <button class="btn" onclick="document.getElementById('changelogModal').classList.remove('show')" style="width:100%;margin-top:16px;">关闭</button>
+    <button class="btn" onclick="document.getElementById('changelogModal').classList.remove('show')" style="margin:12px auto 0;display:block;flex-shrink:0;">关闭</button>
   </div>
 </div>
 <div class="modal-overlay" id="sponsorModal">
@@ -279,7 +282,7 @@ footer a { color:var(--text2); }
       </div>
     </div>
     <p style="font-size:12px;color:var(--text3);margin-top:8px;">转账时请备注昵称，我将列入页面鸣谢名单</p>
-    <button class="btn" onclick="document.getElementById('sponsorModal').classList.remove('show')" style="width:100%;margin-top:14px;">关闭</button>
+    <button class="btn" onclick="document.getElementById('sponsorModal').classList.remove('show')" style="margin:14px auto 0;display:block;">关闭</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
