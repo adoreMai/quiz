@@ -302,7 +302,7 @@ footer a { color:var(--text2); }
     <span style="margin:0 8px;color:var(--border);">|</span>
     <a href="#" id="sponsorBtn">支持</a>
   </p>
-  <p style="font-size:11px;color:var(--text3);margin-top:4px;">题目前缀：<b>**</b> 双源（章节测验+测试题） &middot; <b>*</b> 仅测试题 &middot; 无标记 仅章节测验</p>
+  <p id="prefixLegend" style="font-size:11px;color:var(--text3);margin-top:4px;display:none;">题目前缀：<b>**</b> 双源（章节测验+测试题） &middot; <b>*</b> 仅测试题 &middot; 无标记 仅章节测验</p>
 </footer>
 
 <script>
@@ -488,6 +488,9 @@ async function loadQuestionBank(url) {
       chMap.push({ name: ch.chapter, questions: chQs });
     }
     questionBank = flat; chapters = chMap;
+    // Show prefix legend only if this subject has marked questions
+    var hasPrefix = flat.some(function(q) { var c = q.content; return c.startsWith('** ') || c.startsWith('* '); });
+    document.getElementById('prefixLegend').style.display = hasPrefix ? '' : 'none';
     document.getElementById('main').innerHTML = '';
     switchMode('exam');
     return true;
