@@ -1,9 +1,45 @@
-# 更新日志
+# 公告
+
+### 网站地址
+- **新站（当前）**：[adoremai.github.io/quiz](https://adoremai.github.io/quiz/)
+- **旧站（已弃用）**：[zachkh.github.io/quiz](https://zachkh.github.io/quiz/) — 已设置自动跳转至新站
+- **开源仓库**：[github.com/adoreMai/quiz](https://github.com/adoreMai/quiz)
+
+---
+
+## v2.1.2 (2026-06-21)
+
+### 改进
+- 「更新日志」更名为「公告」，支持发布任意通知
+- 公告页新增网站地址说明（新站、旧站、开源仓库）
+- 公告 Markdown 解析器升级：支持链接 `[text](url)`、粗体 `**text**`
+- 更新日志弹窗改为动态加载 CHANGELOG.md，零依赖 Markdown 渲染
+- 暗色模式支持（`prefers-color-scheme: dark`）
+- 赞助二维码改为弹窗打开时懒加载，减少首屏阻塞
+- 选项增加键盘导航支持（Tab + Enter/Space）
+- 添加 favicon、meta description、Open Graph 标签
+- CSP 增加 `frame-ancestors` 和 `base-uri` 防护
+
+### 修复
+- VERSION 常量更新为 2.1.2
+- 鸣谢区域 CSS 变量修复（`--text1`→`--text`，`--bg2`→`--surface`）
+- 辅助文字对比度改善（`--text3` 从 `#adb5bd` 提升至 `#8a9096`）
+- clean.py 移除个人信息
+
+### 其他
+- 添加 MIT LICENSE
+- 添加 robots.txt
+- README 联系方式精简为 GitHub Issues
+- 页脚添加题目溯源标记说明
+- Console 版权声明
+
+---
 
 ## v2.1.1 (2026-06-20)
 
 ### 改进
-- 修复共同体概论题库中 14 组残留乱码字符（第一章至第十六章）
+- 修复共同体概论题库中 19 组残留乱码字符（跨 4 个 Unicode 区间，含 14 组无歧义字符级映射 + 5 组有歧义字符串级替换）
+- 全量验证 1550 道题（含 188 道无匹配对的章节测验题和 209 道仅测试题），确认零残留乱码
 - 仓库迁移至新账号，更新所有反馈链接和项目地址
 - 「赞助」弹窗优化为「支持」，增加项目介绍和 Star 入口
 - 鸣谢区域独立展示
@@ -13,9 +49,7 @@
 ## v2.1.0 (2026-06-20)
 
 ### 新功能
-- 所有题目（考试/背题/测试/错题本）增加「反馈此题」双通道入口
-  - 默认跳转 GitHub Issues 自动填入题目信息，精准定位
-  - 展开「不会用 GitHub？」可直接查看邮箱和微信
+- 所有题目（考试/背题/测试/错题本）增加「反馈此题」入口，跳转 GitHub Issues 自动填入题目信息
 - 主观题（简答/论述/填空/古文今译）参考答案增加 AI 生成警告标识
 - 反馈弹窗文案扩展为「题目错误、系统漏洞、改进建议」三类
 
