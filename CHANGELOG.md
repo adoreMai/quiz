@@ -10,7 +10,6 @@
 ## v2.1.2 (2026-06-21)
 
 ### 改进
-- 「更新日志」更名为「公告」，支持发布任意通知
 - 公告页新增网站地址说明（新站、旧站、开源仓库）
 - 公告 Markdown 解析器升级：支持链接 `[text](url)`、粗体 `**text**`
 - 更新日志弹窗改为动态加载 CHANGELOG.md，零依赖 Markdown 渲染
@@ -22,16 +21,7 @@
 
 ### 修复
 - VERSION 常量更新为 2.1.2
-- 鸣谢区域 CSS 变量修复（`--text1`→`--text`，`--bg2`→`--surface`）
 - 辅助文字对比度改善（`--text3` 从 `#adb5bd` 提升至 `#8a9096`）
-- clean.py 移除个人信息
-
-### 其他
-- 添加 MIT LICENSE
-- 添加 robots.txt
-- README 联系方式精简为 GitHub Issues
-- 页脚添加题目溯源标记说明
-- Console 版权声明
 
 ---
 
