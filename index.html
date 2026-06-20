@@ -1315,12 +1315,18 @@ function loadChangelog() {
 }
 
 function parseInline(s) {
-  // escape then apply formatting
   s = escH(s);
-  s = s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
-  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">$1</a>');
-  s = s.replace(/`([^`]+)`/g, '<code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:13px;">$1</code>');
-  return s;
+  // extract code spans first so bold/link regex won't match inside them
+  var parts = s.split(/(`[^`]+`)/g);
+  for (var i = 0; i < parts.length; i++) {
+    if (parts[i].startsWith('`') && parts[i].endsWith('`')) {
+      parts[i] = '<code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:13px;">' + parts[i].slice(1, -1) + '</code>';
+    } else {
+      parts[i] = parts[i].replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+      parts[i] = parts[i].replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">$1</a>');
+    }
+  }
+  return parts.join('');
 }
 
 function parseChangelogMD(md) {
