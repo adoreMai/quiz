@@ -655,9 +655,10 @@ function renderSubjectExamSetup() {
   var totalScore = (cfg.scored || []).reduce(function(s, e) { return s + (e.score || 0) * e.count; }, 0);
 
   var scoredRows = (cfg.scored || []).map(function(e) {
+    var unit = e.moduleMode ? (e.count + ' 套 × ' + (e.score || '?') + '分 = ' + (e.count * (e.score || 0)) + '分') : (e.count + '题 × ' + (e.score || '?') + '分 = ' + (e.count * (e.score || 0)) + '分');
     return '<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px;">' +
-      '<span>' + escapeHTML(e.type) + (e.section ? ' (' + escapeHTML(e.section) + ')' : '') + '</span>' +
-      '<span style="color:var(--text2);">' + e.count + '题 × ' + (e.score || '?') + '分 = ' + (e.count * (e.score || 0)) + '分</span>' +
+      '<span>' + escapeHTML(e.type) + (e.section ? ' (' + escapeHTML(e.section) + ')' : '') + (e.moduleMode ? ' <span style="font-size:12px;color:var(--text3);">整模块抽题</span>' : '') + '</span>' +
+      '<span style="color:var(--text2);">' + unit + '</span>' +
       '</div>';
   }).join('');
 
@@ -785,28 +786,47 @@ function startSubjectExam() {
   appState.examSubmitted = false;
 
   var examScores = {};
-  var examCounts = {};
-  (cfg.scored || []).forEach(function(e) {
-    examScores[e.type] = e.score || 0;
-    examCounts[e.type] = (examCounts[e.type] || 0) + e.count;
-  });
-  appState._examScores = examScores;
-  appState._examCounts = examCounts;
-
   var selected = [];
 
-  // Extract scored questions: filter by type AND section
+  // Extract scored questions
   (cfg.scored || []).forEach(function(entry) {
     var pool = questionBank.filter(function(q) { return q.type === entry.type; });
     if (entry.section) {
       pool = pool.filter(function(q) { return q.section === entry.section; });
     }
     if (pool.length === 0) return;
-    var picked = shuffle(pool.slice()).slice(0, entry.count);
-    Array.prototype.push.apply(selected, picked);
+    if (entry.moduleMode) {
+      // Module mode: pick N random chapters, extract ALL questions from their section
+      var chapters = [];
+      var seen = {};
+      for (var i = 0; i < pool.length; i++) {
+        var ch = pool[i].chapter;
+        if (!seen[ch]) { seen[ch] = true; chapters.push(ch); }
+      }
+      var pickedChs = shuffle(chapters.slice()).slice(0, entry.count);
+      var modQs = [];
+      for (var j = 0; j < pickedChs.length; j++) {
+        var chQs = pool.filter(function(q) { return q.chapter === pickedChs[j]; });
+        Array.prototype.push.apply(modQs, chQs);
+      }
+      // Per-question score = total module score / question count
+      var perQScore = modQs.length > 0 ? Math.round((entry.score / modQs.length) * 10) / 10 : 0;
+      for (var k = 0; k < modQs.length; k++) {
+        modQs[k]._score = perQScore;
+      }
+      Array.prototype.push.apply(selected, modQs);
+    } else {
+      // Normal mode: pick N random questions from the pool
+      var picked = shuffle(pool.slice()).slice(0, entry.count);
+      var perQScore2 = picked.length > 0 ? Math.round((entry.score / picked.length) * 10) / 10 : 0;
+      for (var m = 0; m < picked.length; m++) {
+        picked[m]._score = perQScore2;
+      }
+      Array.prototype.push.apply(selected, picked);
+    }
   });
 
-  // Extract unscored questions: filter by type only
+  // Extract unscored questions
   (cfg.unscored || []).forEach(function(entry) {
     var pool = questionBank.filter(function(q) { return q.type === entry.type; });
     if (pool.length === 0) return;
@@ -814,7 +834,9 @@ function startSubjectExam() {
     Array.prototype.push.apply(selected, picked);
   });
 
-  // Preserve config order (scored first, then unscored); do not shuffle
+  appState._examScores = examScores;
+  appState._examCounts = {}; // not used in subject mode
+  // Preserve config order; do not shuffle
   appState.examQuestions = selected;
   renderExamQuestion(0);
 }
@@ -837,7 +859,7 @@ function renderExamQuestion(idx) {
   m.innerHTML = `
     <div class="panel active">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:14px;color:var(--text2);">第 ${idx+1}/${total} 题 &middot; ${escapeHTML(q.chapter)} &middot; ${escapeHTML(q.type)} ${!isSubj?`(${(appState._examScores||{})[q.type]||0}分)`:'(不计分)'}</span>
+        <span style="font-size:14px;color:var(--text2);">第 ${idx+1}/${total} 题 &middot; ${escapeHTML(q.chapter)}${q.section?' &middot; '+escapeHTML(q.section):''} &middot; ${escapeHTML(q.type)} ${!isSubj?`(`+(q._score||(appState._examScores||{})[q.type]||0)+`分)`:'(不计分)'}</span>
         <button class="btn btn-sm" onclick="submitExam()">交卷</button>
       </div>
       ${timerBar}
@@ -973,7 +995,7 @@ function submitExam() {
     } else {
       isCorrect = userAns === correctAns;
     }
-    if (isCorrect) { correct++; totalScore += ((appState._examScores||{})[q.type]||0); }
+    if (isCorrect) { correct++; totalScore += (q._score || ((appState._examScores||{})[q.type]||0)); }
     if (!isCorrect && userAns) addWrong(qid(q), q);
     else if (isCorrect) removeWrong(qid(q));
     details.push({ q, userAns, isCorrect });
@@ -1003,11 +1025,16 @@ function submitExam() {
     detail: detail,
   });
 
-  // Calculate max score
-  const examCounts = appState._examCounts || {};
-  const maxScore = Object.entries(appState._examScores||{}).reduce((sum, [t, s]) => {
-    return sum + (examCounts[t]||0) * s;
-  }, 0);
+  // Calculate max score (sum per-question scores, or fallback to type-based)
+  var maxScore = 0;
+  if (appState.examQuestions && appState.examQuestions.length) {
+    for (var _si = 0; _si < appState.examQuestions.length; _si++) {
+      var sq = appState.examQuestions[_si];
+      if (!SUBJECTIVE_TYPES.includes(sq.type)) {
+        maxScore += sq._score || ((appState._examScores||{})[sq.type]||0);
+      }
+    }
+  }
   const passLine = maxScore * 0.6;
 
   // Show results
