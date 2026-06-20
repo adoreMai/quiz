@@ -1,0 +1,24 @@
+[
+  {
+    "id": "共同体概论",
+    "name": "中华民族共同体概论",
+    "shortName": "共同体概论",
+    "file": "subjects/共同体概论.json",
+    "author": "巩颛硕",
+    "university": "",
+    "profession": "",
+    "questionCount": 1550,
+    "chapters": 16
+  },
+  {
+    "id": "大学语文",
+    "name": "大学语文各课测试题",
+    "shortName": "大学语文",
+    "file": "subjects/大学语文.json",
+    "author": "",
+    "university": "",
+    "profession": "",
+    "questionCount": 124,
+    "chapters": 9
+  }
+]
