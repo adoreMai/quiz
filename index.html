@@ -495,9 +495,11 @@ async function loadQuestionBank(url) {
     for (var _i = 0; _i < flat.length; _i++) {
       var q = flat[_i];
       if (q.options && q.options.length > 1) {
+        var correctOpt = q.options.find(function(o) { return o.label === q.answer; });
+        if (!correctOpt) continue; // skip multi-select etc.
         var labels = q.options.map(function(o) { return o.label; });
         var texts = q.options.map(function(o) { return o.text; });
-        var correctText = q.options.find(function(o) { return o.label === q.answer; }).text;
+        var correctText = correctOpt.text;
         shuffle(texts);
         for (var _j = 0; _j < q.options.length; _j++) {
           q.options[_j].label = labels[_j];
