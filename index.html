@@ -491,21 +491,31 @@ async function loadQuestionBank(url) {
       chMap.push({ name: ch.chapter, questions: chQs });
     }
     questionBank = flat; chapters = chMap;
-    // Shuffle option texts while keeping labels (A/B/C...) in fixed order
+    // Shuffle option texts within each section consistently (same word bank → same order)
+    var groups = {};
     for (var _i = 0; _i < flat.length; _i++) {
       var q = flat[_i];
-      if (q.options && q.options.length > 1) {
-        var correctOpt = q.options.find(function(o) { return o.label === q.answer; });
-        if (!correctOpt) continue; // skip multi-select etc.
-        var labels = q.options.map(function(o) { return o.label; });
-        var texts = q.options.map(function(o) { return o.text; });
-        var correctText = correctOpt.text;
-        shuffle(texts);
-        for (var _j = 0; _j < q.options.length; _j++) {
-          q.options[_j].label = labels[_j];
-          q.options[_j].text = texts[_j];
+      if (!q.options || q.options.length <= 1) continue;
+      var key = q.chapter + '|' + q.section;
+      if (!groups[key]) groups[key] = [];
+      groups[key].push(q);
+    }
+    for (var key in groups) {
+      var qs = groups[key];
+      var template = qs[0];
+      var tCorrectOpt = template.options.find(function(o) { return o.label === template.answer; });
+      if (!tCorrectOpt) continue;
+      var labels = template.options.map(function(o) { return o.label; });
+      var texts = template.options.map(function(o) { return o.text; });
+      shuffle(texts);
+      for (var _j = 0; _j < qs.length; _j++) {
+        var qq = qs[_j];
+        var correctText = qq.options.find(function(o) { return o.label === qq.answer; }).text;
+        for (var _k = 0; _k < qq.options.length; _k++) {
+          qq.options[_k].label = labels[_k];
+          qq.options[_k].text = texts[_k];
         }
-        q.answer = q.options.find(function(o) { return o.text === correctText; }).label;
+        qq.answer = qq.options.find(function(o) { return o.text === correctText; }).label;
       }
     }
     // Show prefix legend only if this subject has marked questions
