@@ -1485,7 +1485,7 @@ let changelogLoaded = false;
 function loadChangelog() {
   if (changelogLoaded) return;
   changelogLoaded = true;
-  fetch('CHANGELOG.md')
+  fetch('CHANGELOG.md?v=' + VERSION)
     .then(r => { if (!r.ok) throw Error(r.status); return r.text(); })
     .then(md => { document.getElementById('changelogContent').innerHTML = parseChangelogMD(md); })
     .catch(() => { document.getElementById('changelogContent').innerHTML = '<p style="text-align:center;color:var(--text3);">加载失败，请前往 <a href="https://github.com/adoreMai/quiz/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">GitHub</a> 查看</p>'; });
