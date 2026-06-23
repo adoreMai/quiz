@@ -312,7 +312,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.2.0';
+const VERSION = '2.2.1';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -492,6 +492,7 @@ async function loadQuestionBank(url) {
     }
     questionBank = flat; chapters = chMap;
     // Shuffle option texts within each section consistently (same word bank → same order)
+    // Only applies when all questions in a group share identical option texts (e.g. 选词填空)
     var groups = {};
     for (var _i = 0; _i < flat.length; _i++) {
       var q = flat[_i];
@@ -508,6 +509,13 @@ async function loadQuestionBank(url) {
       var labels = template.options.map(function(o) { return o.label; });
       var texts = template.options.map(function(o) { return o.text; });
       shuffle(texts);
+      // Pre-validate: all questions must have correct texts present in template's text set
+      var canShuffle = true;
+      for (var _j = 0; _j < qs.length; _j++) {
+        var chkOpt = qs[_j].options.find(function(o) { return o.label === qs[_j].answer; });
+        if (!chkOpt || texts.indexOf(chkOpt.text) === -1) { canShuffle = false; break; }
+      }
+      if (!canShuffle) continue;
       for (var _j = 0; _j < qs.length; _j++) {
         var qq = qs[_j];
         var correctText = qq.options.find(function(o) { return o.label === qq.answer; }).text;
