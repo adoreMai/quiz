@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.3.0';
+const VERSION = '2.3.3';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1538,32 +1538,94 @@ document.getElementById('syncBtn').addEventListener('click', function(e) {
 // DATA EXPORT / IMPORT
 // ============================================================
 // UTF-8 safe Base64 encode/decode (replaces deprecated unescape/escape)
+// Gzip compress then base64 encode (async)
+async function compressToB64(str) {
+  var bytes = new TextEncoder().encode(str);
+  var cs = new CompressionStream('gzip');
+  var writer = cs.writable.getWriter();
+  writer.write(bytes);
+  writer.close();
+  var reader = cs.readable.getReader();
+  var chunks = [];
+  while (true) {
+    var chunk = await reader.read();
+    if (chunk.done) break;
+    chunks.push(chunk.value);
+  }
+  var totalLen = 0;
+  for (var i = 0; i < chunks.length; i++) totalLen += chunks[i].length;
+  var result = new Uint8Array(totalLen);
+  var offset = 0;
+  for (var i = 0; i < chunks.length; i++) { result.set(chunks[i], offset); offset += chunks[i].length; }
+  var chars = [];
+  for (var i = 0; i < result.length; i++) chars.push(String.fromCharCode(result[i]));
+  return btoa(chars.join(''));
+}
+
+// Base64 decode then gzip decompress, with fallback for old uncompressed format
+async function decompressFromB64(str) {
+  var bin = atob(str);
+  // gzip magic bytes 0x1f 0x8b → compressed; otherwise old plain format
+  if (bin.length >= 2 && bin.charCodeAt(0) === 0x1f && bin.charCodeAt(1) === 0x8b) {
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    var ds = new DecompressionStream('gzip');
+    var writer = ds.writable.getWriter();
+    writer.write(bytes);
+    writer.close();
+    var reader = ds.readable.getReader();
+    var chunks = [];
+    while (true) {
+      var chunk = await reader.read();
+      if (chunk.done) break;
+      chunks.push(chunk.value);
+    }
+    var totalLen = 0;
+    for (var i = 0; i < chunks.length; i++) totalLen += chunks[i].length;
+    var result = new Uint8Array(totalLen);
+    var offset = 0;
+    for (var i = 0; i < chunks.length; i++) { result.set(chunks[i], offset); offset += chunks[i].length; }
+    return new TextDecoder().decode(result);
+  }
+  // Old format (uncompressed base64)
+  var bytes = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+// Fallback: plain base64 (no gzip) for browsers without CompressionStream
 function utf8ToB64(str) {
   var bytes = new TextEncoder().encode(str);
   var chars = [];
-  for (var i = 0; i < bytes.length; i++) { chars.push(String.fromCharCode(bytes[i])); }
+  for (var i = 0; i < bytes.length; i++) chars.push(String.fromCharCode(bytes[i]));
   return btoa(chars.join(''));
 }
 function b64ToUtf8(str) {
   var bin = atob(str);
   var bytes = new Uint8Array(bin.length);
-  for (var i = 0; i < bin.length; i++) { bytes[i] = bin.charCodeAt(i); }
+  for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return new TextDecoder().decode(bytes);
 }
 
-function exportData() {
+async function exportData() {
   var payload = {};
   var keys = ['quiz_app_data', 'quiz_current_subject', 'quiz_version'];
   for (var i = 0; i < keys.length; i++) {
     var v = localStorage.getItem(keys[i]);
     if (v !== null) payload[keys[i]] = v;
   }
-  var encoded = utf8ToB64(JSON.stringify(payload));
+  var json = JSON.stringify(payload);
+  var encoded;
+  if (typeof CompressionStream !== 'undefined') {
+    encoded = await compressToB64(json);
+  } else {
+    encoded = utf8ToB64(json);
+  }
   var ta = document.getElementById('exportData');
   ta.value = encoded;
   var btn = document.getElementById('copyExportBtn');
   btn.style.display = 'inline-block';
-  toast('导出数据已生成，点击「复制到剪贴板」');
+  toast('导出数据已生成' + (typeof CompressionStream !== 'undefined' ? '（已压缩）' : '') + '，点击「复制到剪贴板」');
 }
 
 function copyExport() {
@@ -1579,14 +1641,23 @@ function copyExport() {
   }
 }
 
-function importData() {
+async function importData() {
   var raw = document.getElementById('importData').value.trim();
   if (!raw) { toast('请先粘贴导入数据'); return; }
+  var json;
+  try {
+    json = await decompressFromB64(raw);
+  } catch(e) {
+    // Last-resort fallback: try old uncompressed format
+    try { json = b64ToUtf8(raw); } catch(e2) {
+      toast('数据格式无效，请检查是否完整复制'); return;
+    }
+  }
   var payload;
   try {
-    payload = JSON.parse(b64ToUtf8(raw));
+    payload = JSON.parse(json);
   } catch(e) {
-    toast('数据格式无效，请检查是否完整复制'); return;
+    toast('数据解析失败，请检查是否完整复制'); return;
   }
   if (!payload || typeof payload !== 'object') { toast('数据内容无效'); return; }
   if (!payload.quiz_app_data && !payload.quiz_current_subject) { toast('未识别到有效数据，请检查内容'); return; }
