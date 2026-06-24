@@ -285,6 +285,27 @@ footer a { color:var(--text2); }
     <button class="btn" onclick="document.getElementById('sponsorModal').classList.remove('show')" style="margin:14px auto 0;display:block;">关闭</button>
   </div>
 </div>
+<div class="modal-overlay" id="syncModal">
+  <div class="modal" style="text-align:left;max-width:480px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <h2 style="margin:0;">数据导出 / 导入</h2>
+      <button onclick="document.getElementById('syncModal').classList.remove('show')" style="background:none;border:none;font-size:24px;cursor:pointer;color:var(--text2);padding:0 2px;line-height:1;">&times;</button>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:16px;">导出后可将数据复制到另一台设备上导入，实现跨设备同步。</p>
+    <div style="margin-bottom:16px;">
+      <div style="font-weight:600;margin-bottom:6px;font-size:14px;">导出数据</div>
+      <textarea id="exportData" readonly style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:10px;font-size:12px;resize:vertical;font-family:monospace;" placeholder="点击下方按钮生成..."></textarea>
+      <button class="btn btn-sm" onclick="exportData()" style="margin-top:6px;">生成导出数据</button>
+      <button class="btn btn-sm" onclick="copyExport()" id="copyExportBtn" style="margin-top:6px;margin-left:6px;display:none;">复制到剪贴板</button>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:16px;">
+      <div style="font-weight:600;margin-bottom:6px;font-size:14px;">导入数据</div>
+      <textarea id="importData" placeholder="在此粘贴导出的数据..." style="width:100%;height:80px;border:1px solid var(--border);border-radius:6px;padding:10px;font-size:12px;resize:vertical;font-family:monospace;"></textarea>
+      <button class="btn btn-sm btn-primary" onclick="importData()" style="margin-top:6px;">导入并合并</button>
+    </div>
+    <p style="font-size:11px;color:var(--text3);margin-top:12px;">导入会合并数据（错题本、测试进度、考试记录），不会覆盖已有数据。</p>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <div class="thanks-section">
@@ -304,6 +325,8 @@ footer a { color:var(--text2); }
     <a href="#" id="changelogBtn">公告</a>
     <span style="margin:0 8px;color:var(--border);">|</span>
     <a href="#" id="sponsorBtn">支持</a>
+    <span style="margin:0 8px;color:var(--border);">|</span>
+    <a href="#" id="syncBtn">同步</a>
   </p>
   <p id="prefixLegend" style="font-size:11px;color:var(--text3);margin-top:4px;display:none;">题目前缀：<b>**</b> 双源（章节测验+测试题） &middot; <b>*</b> 仅测试题 &middot; 无标记 仅章节测验</p>
 </footer>
@@ -312,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.2.1';
+const VERSION = '2.3.0';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1478,7 +1501,93 @@ document.getElementById('sponsorBtn').addEventListener('click', function(e) {
   showModal('sponsorModal');
 });
 
-['contributeModal','feedbackModal','changelogModal','sponsorModal'].forEach(id => {
+document.getElementById('syncBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  showModal('syncModal');
+});
+
+// ============================================================
+// DATA EXPORT / IMPORT
+// ============================================================
+function exportData() {
+  var payload = {};
+  // Collect all quiz-related localStorage keys
+  var keys = ['quiz_app_data', 'quiz_current_subject', 'quiz_version'];
+  for (var i = 0; i < keys.length; i++) {
+    var v = localStorage.getItem(keys[i]);
+    if (v !== null) payload[keys[i]] = v;
+  }
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+  var ta = document.getElementById('exportData');
+  ta.value = encoded;
+  var btn = document.getElementById('copyExportBtn');
+  btn.style.display = 'inline-block';
+  toast('导出数据已生成，点击「复制到剪贴板」');
+}
+
+function copyExport() {
+  var ta = document.getElementById('exportData');
+  ta.select();
+  try {
+    navigator.clipboard.writeText(ta.value).then(function() {
+      toast('已复制到剪贴板');
+    });
+  } catch(e) {
+    document.execCommand('copy');
+    toast('已复制到剪贴板');
+  }
+}
+
+function importData() {
+  var raw = document.getElementById('importData').value.trim();
+  if (!raw) { toast('请先粘贴导入数据'); return; }
+  var payload;
+  try {
+    payload = JSON.parse(decodeURIComponent(escape(atob(raw))));
+  } catch(e) {
+    toast('数据格式无效，请检查是否完整复制'); return;
+  }
+  if (!payload || typeof payload !== 'object') { toast('数据内容无效'); return; }
+  var imported = 0;
+  var keys = Object.keys(payload);
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    if (k.indexOf('quiz_') === 0) {
+      // Merge quiz_app_data instead of overwriting
+      if (k === 'quiz_app_data') {
+        try {
+          var remote = JSON.parse(payload[k]);
+          var local = {};
+          try { local = JSON.parse(localStorage.getItem(k) || '{}'); } catch(e) {}
+          // Deep merge: remote wins for same keys, local kept for unique
+          var merged = mergeDeep(local, remote);
+          localStorage.setItem(k, JSON.stringify(merged));
+        } catch(e) { localStorage.setItem(k, payload[k]); }
+      } else {
+        localStorage.setItem(k, payload[k]);
+      }
+      imported++;
+    }
+  }
+  toast('导入成功！已合并 ' + imported + ' 项数据，页面即将刷新...');
+  setTimeout(function() { location.reload(); }, 1500);
+}
+
+function mergeDeep(target, source) {
+  var out = {};
+  for (var key in target) { if (target.hasOwnProperty(key)) out[key] = target[key]; }
+  for (var key in source) {
+    if (!source.hasOwnProperty(key)) continue;
+    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key]) && target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])) {
+      out[key] = mergeDeep(target[key], source[key]);
+    } else {
+      out[key] = source[key];  // source wins
+    }
+  }
+  return out;
+}
+
+['contributeModal','feedbackModal','changelogModal','sponsorModal','syncModal'].forEach(id => {
   document.getElementById(id).addEventListener('click', function(e) {
     if (e.target === this) this.classList.remove('show');
   });
