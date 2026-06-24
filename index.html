@@ -1225,7 +1225,7 @@ function startTestChapter(ciOrName, sectionFilter) {
   if (!ch) return;
   let qs = sectionFilter ? ch.questions.filter(q => q.section === sectionFilter) : ch.questions;
   appState._testQuestions = qs;
-  appState._testChapter = ci;
+  appState._testChapter = typeof ciOrName === 'number' ? ciOrName : chapters.findIndex(function(c) { return c.name === ciOrName; });
   const progress = getTestProgress();
   const startIdx = sectionFilter ? 0 : (progress[ch.name] || 0);
   renderTestQuestion(Math.min(startIdx, qs.length - 1));
