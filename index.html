@@ -350,7 +350,10 @@ const STORAGE_KEY = 'quiz_app_data';
 // ============================================================
 let questionBank = null;
 let chapters = [];
+let cachedChapterNames = null;
+let cachedTypes = null;
 const CHAPTER_SKIP_TEST = '课后练习';  // skip chapters matching this in test/exam mode
+const MEMO_PAGE_SIZE = 50;           // questions per page in memorize mode
 let currentMode = 'exam';
 let subjects = [];         // available subjects from subjects.json
 let currentSubject = null; // currently selected subject
@@ -360,7 +363,7 @@ let appState = {
   // test
   testChapterIdx: 0, testQIdx: 0, testFilterChapter: null, testFilterType: null,
   // memorize
-  memoFilterChapter: null, memoFilterType: null,
+  memoFilterChapter: null, memoFilterType: null, memoPage: 0,
   // wrong book
   wrongFilterChapter: null, wrongFilterType: null,
 };
@@ -375,9 +378,8 @@ function shuffle(arr) { for (let i=arr.length-1;i>0;i--) { const j=Math.floor(Ma
 function fmtTime(s) { const m=Math.floor(Math.max(0,s)/60), sec=Math.abs(s)%60; return `${m}:${String(sec).padStart(2,'0')}`; }
 function escapeHTML(str) {
   if (str == null) return '';
-  const d = document.createElement('span');
-  d.textContent = str;
-  return d.innerHTML;
+  var s = String(str);
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 function escapeAttr(str) {
   return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;');
@@ -515,6 +517,9 @@ async function loadQuestionBank(url) {
       chMap.push({ name: ch.chapter, questions: chQs });
     }
     questionBank = flat; chapters = chMap;
+    // Pre-cache chapter names and types for filter bars
+    cachedChapterNames = [...new Set(flat.map(function(q) { return q.chapter; }))];
+    cachedTypes = [...new Set(flat.map(function(q) { return q.type; }))];
     // Shuffle option texts within each section consistently (same word bank → same order)
     // Only applies when all questions in a group share identical option texts (e.g. 选词填空)
     var groups = {};
@@ -1146,22 +1151,47 @@ function renderMemorize() {
     return true;
   });
 
-  const chNames = [...new Set(questionBank.map(q => q.chapter))];
-  const types = [...new Set(questionBank.map(q => q.type))];
+  var chNames = cachedChapterNames || [...new Set(questionBank.map(function(q) { return q.chapter; }))];
+  var types = cachedTypes || [...new Set(questionBank.map(function(q) { return q.type; }))];
+
+  // Pagination
+  var totalPages = Math.ceil(filtered.length / MEMO_PAGE_SIZE);
+  if (totalPages < 1) totalPages = 1;
+  var page = appState.memoPage;
+  if (page >= totalPages) page = totalPages - 1;
+  if (page < 0) page = 0;
+  appState.memoPage = page;
+  var start = page * MEMO_PAGE_SIZE;
+  var pageQs = filtered.slice(start, start + MEMO_PAGE_SIZE);
+
+  var paginationHTML = '';
+  if (totalPages > 1) {
+    var pagesHTML = '';
+    for (var p = 0; p < totalPages; p++) {
+      pagesHTML += '<span class="filter-tag' + (p === page ? ' active' : '') + '" onclick="appState.memoPage=' + p + ';renderMemorize();">' + (p + 1) + '</span>';
+    }
+    paginationHTML = '<div class="filter-bar" style="justify-content:center;flex-wrap:wrap;">' +
+      '<span class="filter-tag" onclick="appState.memoPage=' + Math.max(0, page - 1) + ';renderMemorize();"' + (page === 0 ? ' style="opacity:0.4;"' : '') + '>← 上一页</span>' +
+      pagesHTML +
+      '<span class="filter-tag" onclick="appState.memoPage=' + Math.min(totalPages - 1, page + 1) + ';renderMemorize();"' + (page >= totalPages - 1 ? ' style="opacity:0.4;"' : '') + '>下一页 →</span>' +
+      '</div>';
+  }
 
   const m = document.getElementById('main');
   m.innerHTML = `
     <div class="panel active">
-      <div class="panel-head">背题模式（共 ${filtered.length} 题）</div>
+      <div class="panel-head">背题模式（共 ${filtered.length} 题${totalPages > 1 ? '，第 ' + (start + 1) + '-' + Math.min(start + MEMO_PAGE_SIZE, filtered.length) + ' 题' : ''}）</div>
       <div class="filter-bar">
-        <span class="filter-tag${!cf?' active':''}" onclick="appState.memoFilterChapter=null;renderMemorize();">全部章节</span>
-        ${chNames.map(c => `<span class="filter-tag${cf===c?' active':''}" onclick="appState.memoFilterChapter='${escapeOnclick(c)}';renderMemorize();">${escapeHTML(c)}</span>`).join('')}
+        <span class="filter-tag${!cf?' active':''}" onclick="appState.memoFilterChapter=null;appState.memoPage=0;renderMemorize();">全部章节</span>
+        ${chNames.map(c => `<span class="filter-tag${cf===c?' active':''}" onclick="appState.memoFilterChapter='${escapeOnclick(c)}';appState.memoPage=0;renderMemorize();">${escapeHTML(c)}</span>`).join('')}
       </div>
       <div class="filter-bar">
-        <span class="filter-tag${!tf?' active':''}" onclick="appState.memoFilterType=null;renderMemorize();">全部题型</span>
-        ${types.map(t => `<span class="filter-tag${tf===t?' active':''}" onclick="appState.memoFilterType='${escapeOnclick(t)}';renderMemorize();">${escapeHTML(t)}</span>`).join('')}
+        <span class="filter-tag${!tf?' active':''}" onclick="appState.memoFilterType=null;appState.memoPage=0;renderMemorize();">全部题型</span>
+        ${types.map(t => `<span class="filter-tag${tf===t?' active':''}" onclick="appState.memoFilterType='${escapeOnclick(t)}';appState.memoPage=0;renderMemorize();">${escapeHTML(t)}</span>`).join('')}
       </div>
-      <div id="memoList">${renderMemoList(filtered)}</div>
+      ${paginationHTML}
+      <div id="memoList">${renderMemoList(pageQs)}</div>
+      ${paginationHTML}
     </div>`;
 }
 
@@ -1183,8 +1213,6 @@ function renderMemoList(questions) {
 function renderTestOverview() {
   if (!questionBank) return;
   const progress = getTestProgress();
-  const totalPerCh = {};
-  for (const q of questionBank) { totalPerCh[q.chapter] = (totalPerCh[q.chapter]||0) + 1; }
   // Exclude PDF/skip chapters
   const testChapters = chapters.filter(ch => !ch.name.includes(CHAPTER_SKIP_TEST));
   const testQCount = testChapters.reduce((s, ch) => s + ch.questions.length, 0);
