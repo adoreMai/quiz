@@ -1,0 +1,3189 @@
+[
+  {
+    "chapter": "心理学",
+    "sections": [
+      {
+        "type": "单选题",
+        "questions": [
+          {
+            "index": 1,
+            "type": "单选题",
+            "content": "下列属于心理学基础理论领域的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "教育心理学"
+              },
+              {
+                "label": "B",
+                "text": "管理心理学"
+              },
+              {
+                "label": "C",
+                "text": "普通心理学"
+              },
+              {
+                "label": "D",
+                "text": "消费心理学"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 2,
+            "type": "单选题",
+            "content": "思维的基本过程是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "分析与综合"
+              },
+              {
+                "label": "B",
+                "text": "比较与分类"
+              },
+              {
+                "label": "C",
+                "text": "抽象与概括"
+              },
+              {
+                "label": "D",
+                "text": "系统与具体化"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 3,
+            "type": "单选题",
+            "content": "下列心理现象不属于条件反射的是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "眨眼反射"
+              },
+              {
+                "label": "B",
+                "text": "望梅止渴"
+              },
+              {
+                "label": "C",
+                "text": "谈虎色变"
+              },
+              {
+                "label": "D",
+                "text": "语言习得"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 4,
+            "type": "单选题",
+            "content": "人类的思维属于",
+            "options": [
+              {
+                "label": "A",
+                "text": "情感过程"
+              },
+              {
+                "label": "B",
+                "text": "认识过程"
+              },
+              {
+                "label": "C",
+                "text": "意志过程"
+              },
+              {
+                "label": "D",
+                "text": "个性过程"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 5,
+            "type": "单选题",
+            "content": "看小说时产生的想象主要是",
+            "options": [
+              {
+                "label": "A",
+                "text": "创造想象"
+              },
+              {
+                "label": "B",
+                "text": "无意想象"
+              },
+              {
+                "label": "C",
+                "text": "幻想"
+              },
+              {
+                "label": "D",
+                "text": "再造想象"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 6,
+            "type": "单选题",
+            "content": "科学心理学诞生于",
+            "options": [
+              {
+                "label": "A",
+                "text": "1864年"
+              },
+              {
+                "label": "B",
+                "text": "1879年"
+              },
+              {
+                "label": "C",
+                "text": "1903年"
+              },
+              {
+                "label": "D",
+                "text": "1920年"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 7,
+            "type": "单选题",
+            "content": "使心理学成为一个独立学科的标志人物是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "冯特"
+              },
+              {
+                "label": "B",
+                "text": "弗洛伊德"
+              },
+              {
+                "label": "C",
+                "text": "詹姆斯"
+              },
+              {
+                "label": "D",
+                "text": "伍德"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 8,
+            "type": "单选题",
+            "content": "下列心理现象属于条件反射的是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "眨眼反射"
+              },
+              {
+                "label": "B",
+                "text": "望梅止渴"
+              },
+              {
+                "label": "C",
+                "text": "膝跳反射"
+              },
+              {
+                "label": "D",
+                "text": "吮吸反射"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 9,
+            "type": "单选题",
+            "content": "斯金纳研究的条件反射是",
+            "options": [
+              {
+                "label": "A",
+                "text": "操作性条件反射"
+              },
+              {
+                "label": "B",
+                "text": "非条件反射"
+              },
+              {
+                "label": "C",
+                "text": "经典性条件反射"
+              },
+              {
+                "label": "D",
+                "text": "理性条件反射"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 10,
+            "type": "单选题",
+            "content": "神经系统的基本结构单位",
+            "options": [
+              {
+                "label": "A",
+                "text": "神经元"
+              },
+              {
+                "label": "B",
+                "text": "神经"
+              },
+              {
+                "label": "C",
+                "text": "脑细胞"
+              },
+              {
+                "label": "D",
+                "text": "反射"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 11,
+            "type": "单选题",
+            "content": "神经元的结构不包括",
+            "options": [
+              {
+                "label": "A",
+                "text": "树突"
+              },
+              {
+                "label": "B",
+                "text": "轴突"
+              },
+              {
+                "label": "C",
+                "text": "细胞体"
+              },
+              {
+                "label": "D",
+                "text": "感受器"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 12,
+            "type": "单选题",
+            "content": "大脑的平均重量约为",
+            "options": [
+              {
+                "label": "A",
+                "text": "1200克"
+              },
+              {
+                "label": "B",
+                "text": "1300克"
+              },
+              {
+                "label": "C",
+                "text": "1400克"
+              },
+              {
+                "label": "D",
+                "text": "1500克"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 13,
+            "type": "单选题",
+            "content": "下列心理活动主要在大脑左半球进行的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "语言表达"
+              },
+              {
+                "label": "B",
+                "text": "音乐感知"
+              },
+              {
+                "label": "C",
+                "text": "方位识别"
+              },
+              {
+                "label": "D",
+                "text": "图形感知"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 14,
+            "type": "单选题",
+            "content": "下列心理活动主要在大脑右半球进行的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "语言"
+              },
+              {
+                "label": "B",
+                "text": "方位感觉"
+              },
+              {
+                "label": "C",
+                "text": "计算"
+              },
+              {
+                "label": "D",
+                "text": "实验操作"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 15,
+            "type": "单选题",
+            "content": "小学生容易记住电影、电视中反面人物的一言一行，这种识记属于（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "无意识记"
+              },
+              {
+                "label": "B",
+                "text": "有意识记"
+              },
+              {
+                "label": "C",
+                "text": "机械识记"
+              },
+              {
+                "label": "D",
+                "text": "意义识记"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 16,
+            "type": "单选题",
+            "content": "注意的两个基本特征包括集中性和：",
+            "options": [
+              {
+                "label": "A",
+                "text": "防御性"
+              },
+              {
+                "label": "B",
+                "text": "主动性"
+              },
+              {
+                "label": "C",
+                "text": "选择性"
+              },
+              {
+                "label": "D",
+                "text": "有效性"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 17,
+            "type": "单选题",
+            "content": "有预定目的，有意志努力的注意是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "有意注意"
+              },
+              {
+                "label": "B",
+                "text": "无意注意"
+              },
+              {
+                "label": "C",
+                "text": "有意后注意"
+              },
+              {
+                "label": "D",
+                "text": "不随意注意"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 18,
+            "type": "单选题",
+            "content": "注意的两个基本特征包括选择性和",
+            "options": [
+              {
+                "label": "A",
+                "text": "防御性"
+              },
+              {
+                "label": "B",
+                "text": "主动性"
+              },
+              {
+                "label": "C",
+                "text": "集中性"
+              },
+              {
+                "label": "D",
+                "text": "有效性"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 19,
+            "type": "单选题",
+            "content": "教师一边上课，一边观察学生的行为，这是注意的",
+            "options": [
+              {
+                "label": "A",
+                "text": "转移"
+              },
+              {
+                "label": "B",
+                "text": "广度"
+              },
+              {
+                "label": "C",
+                "text": "分配"
+              },
+              {
+                "label": "D",
+                "text": "分散"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 20,
+            "type": "单选题",
+            "content": "正在认真听课的学生被教室外巨大的声音吸引，此时的注意状态是",
+            "options": [
+              {
+                "label": "A",
+                "text": "无意注意"
+              },
+              {
+                "label": "B",
+                "text": "有意后注意"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 21,
+            "type": "单选题",
+            "content": "同注意分散相反的状态是",
+            "options": [
+              {
+                "label": "A",
+                "text": "注意的集中"
+              },
+              {
+                "label": "B",
+                "text": "注意的稳定"
+              },
+              {
+                "label": "C",
+                "text": "注意的转移"
+              },
+              {
+                "label": "D",
+                "text": "注意的广度"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 22,
+            "type": "单选题",
+            "content": "间接兴趣能引起和保持",
+            "options": [
+              {
+                "label": "A",
+                "text": "无意注意"
+              },
+              {
+                "label": "B",
+                "text": "有意注意"
+              },
+              {
+                "label": "C",
+                "text": "有意后注意"
+              },
+              {
+                "label": "D",
+                "text": "随意注意"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 23,
+            "type": "单选题",
+            "content": "马斯洛把完善自己，充分发挥自己的潜能，完成自身使命的需要称作",
+            "options": [
+              {
+                "label": "A",
+                "text": "尊重的需要"
+              },
+              {
+                "label": "B",
+                "text": "归属和爱的需要"
+              },
+              {
+                "label": "C",
+                "text": "自我实现的需要"
+              },
+              {
+                "label": "D",
+                "text": "成长的需要"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 24,
+            "type": "单选题",
+            "content": "技术熟练的驾驶员可以很轻松驾驶汽车，是因为此时的注意状态是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "无意注意"
+              },
+              {
+                "label": "B",
+                "text": "有意后注意"
+              },
+              {
+                "label": "C",
+                "text": "无条件注意"
+              },
+              {
+                "label": "D",
+                "text": "有意注意"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 25,
+            "type": "单选题",
+            "content": "认识、情感和意志统称为（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "心理特征"
+              },
+              {
+                "label": "B",
+                "text": "心理过程"
+              },
+              {
+                "label": "C",
+                "text": "个性倾向"
+              },
+              {
+                "label": "D",
+                "text": "理性活动"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 26,
+            "type": "单选题",
+            "content": "心理现象分为（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "心理过程与个性心理"
+              },
+              {
+                "label": "B",
+                "text": "认知过程与个性心理"
+              },
+              {
+                "label": "C",
+                "text": "情感过程与个性心理"
+              },
+              {
+                "label": "D",
+                "text": "意志过程与个性理"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 27,
+            "type": "单选题",
+            "content": "情绪与情感反映的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "客观事物的本质特征"
+              },
+              {
+                "label": "B",
+                "text": "客观事物的外部特征"
+              },
+              {
+                "label": "C",
+                "text": "客观事物之间的关系"
+              },
+              {
+                "label": "D",
+                "text": "客观事物与人的需要之间的关系"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 28,
+            "type": "单选题",
+            "content": "达到最佳记忆效果的学习程度是",
+            "options": [
+              {
+                "label": "A",
+                "text": "150%"
+              },
+              {
+                "label": "B",
+                "text": "200%"
+              },
+              {
+                "label": "C",
+                "text": "250%"
+              },
+              {
+                "label": "D",
+                "text": "100%"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 29,
+            "type": "单选题",
+            "content": "编制世界上最早的一个智力测量表的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "吉尔福特"
+              },
+              {
+                "label": "B",
+                "text": "推孟"
+              },
+              {
+                "label": "C",
+                "text": "比奈-西蒙"
+              },
+              {
+                "label": "D",
+                "text": "韦克斯勒"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 30,
+            "type": "单选题",
+            "content": "人脑对直接作用于感觉器官的事物的个别属性的反映是",
+            "options": [
+              {
+                "label": "A",
+                "text": "思维"
+              },
+              {
+                "label": "B",
+                "text": "想象"
+              },
+              {
+                "label": "C",
+                "text": "知觉"
+              },
+              {
+                "label": "D",
+                "text": "感觉"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 31,
+            "type": "单选题",
+            "content": "根据鸟的飞翔发明了飞机，这是利用了思维的",
+            "options": [
+              {
+                "label": "A",
+                "text": "功能固着"
+              },
+              {
+                "label": "B",
+                "text": "替代作用"
+              },
+              {
+                "label": "C",
+                "text": "思维定势"
+              },
+              {
+                "label": "D",
+                "text": "原型启发"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 32,
+            "type": "单选题",
+            "content": "衡量感受性高低可用",
+            "options": [
+              {
+                "label": "A",
+                "text": "智商"
+              },
+              {
+                "label": "B",
+                "text": "韦伯分数"
+              },
+              {
+                "label": "C",
+                "text": "情商"
+              },
+              {
+                "label": "D",
+                "text": "感觉阈限"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 33,
+            "type": "单选题",
+            "content": "有的同学能够在学习中获得快乐，这时所产生的情感是",
+            "options": [
+              {
+                "label": "A",
+                "text": "理智感"
+              },
+              {
+                "label": "B",
+                "text": "幸福感"
+              },
+              {
+                "label": "C",
+                "text": "美感"
+              },
+              {
+                "label": "D",
+                "text": "满足感"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 34,
+            "type": "单选题",
+            "content": "主体对一定活动有了某种预先的准备状态，它决定着后续同类心理活动的趋势，这种现象称为",
+            "options": [
+              {
+                "label": "A",
+                "text": "暗示"
+              },
+              {
+                "label": "B",
+                "text": "定势"
+              },
+              {
+                "label": "C",
+                "text": "定型"
+              },
+              {
+                "label": "D",
+                "text": "期待"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 35,
+            "type": "单选题",
+            "content": "幼儿借手指进行的运算属于",
+            "options": [
+              {
+                "label": "A",
+                "text": "形象思维"
+              },
+              {
+                "label": "B",
+                "text": "早期思维"
+              },
+              {
+                "label": "C",
+                "text": "抽象思维"
+              },
+              {
+                "label": "D",
+                "text": "动作思维"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 36,
+            "type": "单选题",
+            "content": "心理学源于（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "宗教"
+              },
+              {
+                "label": "B",
+                "text": "哲学"
+              },
+              {
+                "label": "C",
+                "text": "社会学"
+              },
+              {
+                "label": "D",
+                "text": "生理学"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 37,
+            "type": "单选题",
+            "content": "暗适应过程视觉感受性的变化是",
+            "options": [
+              {
+                "label": "A",
+                "text": "变强"
+              },
+              {
+                "label": "B",
+                "text": "变弱"
+              },
+              {
+                "label": "C",
+                "text": "不变"
+              },
+              {
+                "label": "D",
+                "text": "不确定"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 38,
+            "type": "单选题",
+            "content": "思想开小差是注意的",
+            "options": [
+              {
+                "label": "A",
+                "text": "分散"
+              },
+              {
+                "label": "B",
+                "text": "转移"
+              },
+              {
+                "label": "C",
+                "text": "动摇"
+              },
+              {
+                "label": "D",
+                "text": "起伏"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 39,
+            "type": "单选题",
+            "content": "人们看书时，用红笔画出重点，这是利用了知觉的",
+            "options": [
+              {
+                "label": "A",
+                "text": "整体性"
+              },
+              {
+                "label": "B",
+                "text": "选择性"
+              },
+              {
+                "label": "C",
+                "text": "理解性"
+              },
+              {
+                "label": "D",
+                "text": "恒常性"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 40,
+            "type": "单选题",
+            "content": "灰尘落在皮肤上我们却感觉不到，可解释这一现象的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "感觉适应"
+              },
+              {
+                "label": "B",
+                "text": "感觉阈限"
+              },
+              {
+                "label": "C",
+                "text": "感觉水平"
+              },
+              {
+                "label": "D",
+                "text": "感觉不敏感"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 41,
+            "type": "单选题",
+            "content": "需要层次理论的提出者",
+            "options": [
+              {
+                "label": "A",
+                "text": "比奈"
+              },
+              {
+                "label": "B",
+                "text": "马斯洛"
+              },
+              {
+                "label": "C",
+                "text": "冯特"
+              },
+              {
+                "label": "D",
+                "text": "斯金纳"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 42,
+            "type": "单选题",
+            "content": "以下不属于听觉的主观体验的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "音高"
+              },
+              {
+                "label": "B",
+                "text": "响度"
+              },
+              {
+                "label": "C",
+                "text": "音色"
+              },
+              {
+                "label": "D",
+                "text": "振幅"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 43,
+            "type": "单选题",
+            "content": "在控制的条件下系统的操纵某种变量的变化，来研究这种变量的变化对其他变量所产生的影响的方法是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "观察法"
+              },
+              {
+                "label": "B",
+                "text": "调查法"
+              },
+              {
+                "label": "C",
+                "text": "实验法"
+              },
+              {
+                "label": "D",
+                "text": "个案研究法"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 44,
+            "type": "单选题",
+            "content": "短时记忆的储存时间一般不超过",
+            "options": [
+              {
+                "label": "A",
+                "text": "1分钟"
+              },
+              {
+                "label": "B",
+                "text": "1秒"
+              },
+              {
+                "label": "C",
+                "text": "2分钟"
+              },
+              {
+                "label": "D",
+                "text": "10秒"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 45,
+            "type": "单选题",
+            "content": "以下不属于似动知觉的是",
+            "options": [
+              {
+                "label": "A",
+                "text": "自主运动"
+              },
+              {
+                "label": "B",
+                "text": "β运动"
+              },
+              {
+                "label": "C",
+                "text": "诱导运动"
+              },
+              {
+                "label": "D",
+                "text": "跳跃运动"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 46,
+            "type": "单选题",
+            "content": "情绪、情感产生的基础是",
+            "options": [
+              {
+                "label": "A",
+                "text": "态度"
+              },
+              {
+                "label": "B",
+                "text": "动机"
+              },
+              {
+                "label": "C",
+                "text": "认识"
+              },
+              {
+                "label": "D",
+                "text": "个性"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 47,
+            "type": "单选题",
+            "content": "学习程度对保持和遗忘有较大影响，实验证明，既不产生疲劳又使保持的效果最佳的过度学习为",
+            "options": [
+              {
+                "label": "A",
+                "text": "100%"
+              },
+              {
+                "label": "B",
+                "text": "150%"
+              },
+              {
+                "label": "C",
+                "text": "200%"
+              },
+              {
+                "label": "D",
+                "text": "80%"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 48,
+            "type": "单选题",
+            "content": "第一个提出智商概念的智力量表是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "罗夏墨迹测验"
+              },
+              {
+                "label": "B",
+                "text": "韦克斯勒量表"
+              },
+              {
+                "label": "C",
+                "text": "斯坦福-比奈量表"
+              },
+              {
+                "label": "D",
+                "text": "比奈-西蒙量表"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 49,
+            "type": "单选题",
+            "content": "美国人本主义心理学家马斯洛所提出的需要理论叫",
+            "options": [
+              {
+                "label": "A",
+                "text": "精神分析理论"
+              },
+              {
+                "label": "B",
+                "text": "需要层次理论"
+              },
+              {
+                "label": "C",
+                "text": "三重需要理论"
+              },
+              {
+                "label": "D",
+                "text": "需要演化理论"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 50,
+            "type": "单选题",
+            "content": "注意的广度又可以称之为：",
+            "options": [
+              {
+                "label": "A",
+                "text": "注意的分配"
+              },
+              {
+                "label": "B",
+                "text": "注意的转移"
+              },
+              {
+                "label": "C",
+                "text": "注意的分散"
+              },
+              {
+                "label": "D",
+                "text": "注意的范围"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 51,
+            "type": "单选题",
+            "content": "感知过的事物或对象不在面前，而在头脑中重现出来的过程是",
+            "options": [
+              {
+                "label": "A",
+                "text": "再认"
+              },
+              {
+                "label": "B",
+                "text": "回忆"
+              },
+              {
+                "label": "C",
+                "text": "表象"
+              },
+              {
+                "label": "D",
+                "text": "想象"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 52,
+            "type": "单选题",
+            "content": "经验过的事物再度出现时，能把它认出来，这是",
+            "options": [
+              {
+                "label": "A",
+                "text": "再认"
+              },
+              {
+                "label": "B",
+                "text": "回忆"
+              },
+              {
+                "label": "C",
+                "text": "识记"
+              },
+              {
+                "label": "D",
+                "text": "保持"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 53,
+            "type": "单选题",
+            "content": "明适应的过程视觉感受性的变化是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "变强"
+              },
+              {
+                "label": "B",
+                "text": "变弱"
+              },
+              {
+                "label": "C",
+                "text": "不变"
+              },
+              {
+                "label": "D",
+                "text": "不确定"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 54,
+            "type": "单选题",
+            "content": "回答考试中的选择题，主要依靠记忆过程中的（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "识记"
+              },
+              {
+                "label": "B",
+                "text": "保持"
+              },
+              {
+                "label": "C",
+                "text": "再认"
+              },
+              {
+                "label": "D",
+                "text": "回忆"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 55,
+            "type": "单选题",
+            "content": "注意的稳定性是注意在下列哪种选项上的特征?",
+            "options": [
+              {
+                "label": "A",
+                "text": "广度"
+              },
+              {
+                "label": "B",
+                "text": "强度"
+              },
+              {
+                "label": "C",
+                "text": "时间"
+              },
+              {
+                "label": "D",
+                "text": "空间"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 56,
+            "type": "单选题",
+            "content": "感觉阀限与感受性之间的关系是：（  ）",
+            "options": [
+              {
+                "label": "B",
+                "text": "反比关系"
+              },
+              {
+                "label": "C",
+                "text": "相关关系"
+              },
+              {
+                "label": "D",
+                "text": "因果关系"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 57,
+            "type": "单选题",
+            "content": "知觉的条件在一定范围改变时，知觉映象却保持相对稳定，这种特征是知觉的",
+            "options": [
+              {
+                "label": "A",
+                "text": "选择性"
+              },
+              {
+                "label": "B",
+                "text": "整体性"
+              },
+              {
+                "label": "C",
+                "text": "恒常性"
+              },
+              {
+                "label": "D",
+                "text": "理解性"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 58,
+            "type": "单选题",
+            "content": "感觉记忆的存储时间一般不超过：",
+            "options": [
+              {
+                "label": "A",
+                "text": "1秒"
+              },
+              {
+                "label": "B",
+                "text": "2秒"
+              },
+              {
+                "label": "C",
+                "text": "3秒"
+              },
+              {
+                "label": "D",
+                "text": "1分钟"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 59,
+            "type": "单选题",
+            "content": "注意里的转移与人的气质类型有关，注意力容易转移的气质类型是",
+            "options": [
+              {
+                "label": "A",
+                "text": "胆汁质"
+              },
+              {
+                "label": "B",
+                "text": "多血质"
+              },
+              {
+                "label": "C",
+                "text": "黏液质"
+              },
+              {
+                "label": "D",
+                "text": "抑郁质"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 60,
+            "type": "单选题",
+            "content": "学习程度对保持和遗忘有较大影响，实验证明，既不产生疲劳又使保持的效果最佳的过度学习为",
+            "options": [
+              {
+                "label": "A",
+                "text": "100%"
+              },
+              {
+                "label": "B",
+                "text": "150%"
+              },
+              {
+                "label": "C",
+                "text": "200%"
+              },
+              {
+                "label": "D",
+                "text": "80%"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 61,
+            "type": "单选题",
+            "content": "用实验证明遗忘的速度先快后慢的心理学家是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "艾宾浩斯"
+              },
+              {
+                "label": "B",
+                "text": "斯皮尔曼"
+              },
+              {
+                "label": "C",
+                "text": "弗洛伊德"
+              },
+              {
+                "label": "D",
+                "text": "韦克斯勒"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 62,
+            "type": "单选题",
+            "content": "下列哪种是外部感觉?",
+            "options": [
+              {
+                "label": "A",
+                "text": "运动觉"
+              },
+              {
+                "label": "B",
+                "text": "平衡觉"
+              },
+              {
+                "label": "C",
+                "text": "皮肤觉"
+              },
+              {
+                "label": "D",
+                "text": "内脏觉"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 63,
+            "type": "单选题",
+            "content": "学习汉语拼音的知识经验会影响到英语的学习，其原因是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "定势"
+              },
+              {
+                "label": "B",
+                "text": "固着"
+              },
+              {
+                "label": "C",
+                "text": "原型启发"
+              },
+              {
+                "label": "D",
+                "text": "迁移"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 64,
+            "type": "单选题",
+            "content": "瓦特从蒸汽把水壶盖推得上下移动而进入蒸汽机的发明制作，这是（  ）作用。",
+            "options": [
+              {
+                "label": "A",
+                "text": "原型启发"
+              },
+              {
+                "label": "B",
+                "text": "迁移"
+              },
+              {
+                "label": "C",
+                "text": "科学幻想"
+              },
+              {
+                "label": "D",
+                "text": "再造幻想"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 65,
+            "type": "单选题",
+            "content": "做了坏事会觉得愧疚，这时产生的情感是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "道德感"
+              },
+              {
+                "label": "B",
+                "text": "负罪感"
+              },
+              {
+                "label": "C",
+                "text": "理智感"
+              },
+              {
+                "label": "D",
+                "text": "后悔感"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 66,
+            "type": "单选题",
+            "content": "已经掌握的知识技能对新知识技能的掌握产生的影响作用称为",
+            "options": [
+              {
+                "label": "A",
+                "text": "定势"
+              },
+              {
+                "label": "B",
+                "text": "迁移"
+              },
+              {
+                "label": "C",
+                "text": "原型启发"
+              },
+              {
+                "label": "D",
+                "text": "功能固着作用"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 67,
+            "type": "单选题",
+            "content": "幼儿“珠心算”时进行的运算属于：",
+            "options": [
+              {
+                "label": "A",
+                "text": "形象思维"
+              },
+              {
+                "label": "B",
+                "text": "早期思维"
+              },
+              {
+                "label": "C",
+                "text": "抽象思维"
+              },
+              {
+                "label": "D",
+                "text": "动作思维"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 68,
+            "type": "单选题",
+            "content": "有预定目的任务，而又自觉地运用方法的识忆是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "有意识记"
+              },
+              {
+                "label": "B",
+                "text": "无意识记"
+              },
+              {
+                "label": "C",
+                "text": "机械识记"
+              },
+              {
+                "label": "D",
+                "text": "意义识记"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 69,
+            "type": "单选题",
+            "content": "无意义音节的首创者和遗忘曲线最先提出者是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "巴甫洛夫"
+              },
+              {
+                "label": "B",
+                "text": "艾宾浩斯"
+              },
+              {
+                "label": "C",
+                "text": "詹金斯"
+              },
+              {
+                "label": "D",
+                "text": "达伦巴赫"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 70,
+            "type": "单选题",
+            "content": "微弱，持久，具有渲染性的情绪状态是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "焦虑"
+              },
+              {
+                "label": "B",
+                "text": "抑郁"
+              },
+              {
+                "label": "C",
+                "text": "心境"
+              },
+              {
+                "label": "D",
+                "text": "应激"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 71,
+            "type": "单选题",
+            "content": "艾宾浩斯的研究发现，遗忘进程",
+            "options": [
+              {
+                "label": "A",
+                "text": "先慢后快"
+              },
+              {
+                "label": "B",
+                "text": "先快后慢"
+              },
+              {
+                "label": "C",
+                "text": "很快"
+              },
+              {
+                "label": "D",
+                "text": "很慢"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 72,
+            "type": "单选题",
+            "content": "直接影响活动效率，使活动顺利完成的个性心理特征称为",
+            "options": [
+              {
+                "label": "A",
+                "text": "意志"
+              },
+              {
+                "label": "B",
+                "text": "能力"
+              },
+              {
+                "label": "C",
+                "text": "素质"
+              },
+              {
+                "label": "D",
+                "text": "性格"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 73,
+            "type": "单选题",
+            "content": "强，平衡，灵活的气质类型是：",
+            "options": [
+              {
+                "label": "A",
+                "text": "胆汁质"
+              },
+              {
+                "label": "B",
+                "text": "多血质"
+              },
+              {
+                "label": "C",
+                "text": "粘液质"
+              },
+              {
+                "label": "D",
+                "text": "抑郁质"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 74,
+            "type": "单选题",
+            "content": "安静、稳重、反应缓慢属于的气质类型是",
+            "options": [
+              {
+                "label": "A",
+                "text": "胆汁质"
+              },
+              {
+                "label": "B",
+                "text": "多血质"
+              },
+              {
+                "label": "C",
+                "text": "粘液质"
+              },
+              {
+                "label": "D",
+                "text": "抑郁质"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 75,
+            "type": "单选题",
+            "content": "瓦特从蒸汽把水壶盖推得上下移动而进入蒸汽机的发明制作，这是（  ）作用。",
+            "options": [
+              {
+                "label": "A",
+                "text": "原型启发"
+              },
+              {
+                "label": "B",
+                "text": "迁移"
+              },
+              {
+                "label": "C",
+                "text": "科学幻想"
+              },
+              {
+                "label": "D",
+                "text": "再造幻想"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 76,
+            "type": "单选题",
+            "content": "根据言语描述或图形描绘，在人脑中产生新形象的过程是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "想象"
+              },
+              {
+                "label": "B",
+                "text": "表象"
+              },
+              {
+                "label": "C",
+                "text": "再造想象"
+              },
+              {
+                "label": "D",
+                "text": "创造想象"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 77,
+            "type": "单选题",
+            "content": "强烈的、迅速爆发而时间短暂的的情绪状态是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "心境"
+              },
+              {
+                "label": "B",
+                "text": "应激"
+              },
+              {
+                "label": "C",
+                "text": "热情"
+              },
+              {
+                "label": "D",
+                "text": "激情"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 78,
+            "type": "单选题",
+            "content": "强、不平衡的气质类型是",
+            "options": [
+              {
+                "label": "A",
+                "text": "胆汁质"
+              },
+              {
+                "label": "B",
+                "text": "多血质"
+              },
+              {
+                "label": "C",
+                "text": "粘液质"
+              },
+              {
+                "label": "A",
+                "text": "气质"
+              },
+              {
+                "label": "B",
+                "text": "能力"
+              },
+              {
+                "label": "C",
+                "text": "性格"
+              },
+              {
+                "label": "D",
+                "text": "需要"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 79,
+            "type": "单选题",
+            "content": "科学智力测验的诞生时间",
+            "options": [
+              {
+                "label": "A",
+                "text": "1905年"
+              },
+              {
+                "label": "B",
+                "text": "1879年"
+              },
+              {
+                "label": "C",
+                "text": "1882年"
+              },
+              {
+                "label": "D",
+                "text": "1916年"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 80,
+            "type": "单选题",
+            "content": "设计并发明一种新机器属于（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "动作思维"
+              },
+              {
+                "label": "B",
+                "text": "形象思维"
+              },
+              {
+                "label": "C",
+                "text": "再现思维"
+              },
+              {
+                "label": "D",
+                "text": "创造思维"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 81,
+            "type": "单选题",
+            "content": "强烈且有爆发性特点的情绪状态是",
+            "options": [
+              {
+                "label": "A",
+                "text": "激情"
+              },
+              {
+                "label": "B",
+                "text": "渴望"
+              },
+              {
+                "label": "C",
+                "text": "焦躁"
+              },
+              {
+                "label": "D",
+                "text": "兴奋"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 82,
+            "type": "单选题",
+            "content": "医生通过观察，摸脉诊断病情，这是思维的",
+            "options": [
+              {
+                "label": "A",
+                "text": "直接性"
+              },
+              {
+                "label": "B",
+                "text": "广阔性"
+              },
+              {
+                "label": "C",
+                "text": "间接性"
+              },
+              {
+                "label": "D",
+                "text": "概括性"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 83,
+            "type": "单选题",
+            "content": "一个人做了好事感到愉快，做了坏事感到内疚，属于（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "理智感"
+              },
+              {
+                "label": "B",
+                "text": "美感"
+              },
+              {
+                "label": "C",
+                "text": "道德感"
+              },
+              {
+                "label": "D",
+                "text": "激情"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 84,
+            "type": "单选题",
+            "content": "工人操作机器时，眼、耳、手并用是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "注意的分散"
+              },
+              {
+                "label": "B",
+                "text": "注意的分配"
+              },
+              {
+                "label": "C",
+                "text": "注意的转移"
+              },
+              {
+                "label": "D",
+                "text": "注意的范围"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 85,
+            "type": "单选题",
+            "content": "俗话所说的“人心不同，各如其面”是指个性的（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "独特性"
+              },
+              {
+                "label": "B",
+                "text": "可变性"
+              },
+              {
+                "label": "C",
+                "text": "稳定性"
+              },
+              {
+                "label": "D",
+                "text": "一般性"
+              }
+            ],
+            "answer": "A"
+          },
+          {
+            "index": 86,
+            "type": "单选题",
+            "content": "提出需要层次论的是（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "比奈"
+              },
+              {
+                "label": "B",
+                "text": "马斯洛"
+              },
+              {
+                "label": "C",
+                "text": "冯特"
+              },
+              {
+                "label": "D",
+                "text": "斯金纳"
+              }
+            ],
+            "answer": "B"
+          },
+          {
+            "index": 87,
+            "type": "单选题",
+            "content": "下列哪项是非文字智力测验",
+            "options": [
+              {
+                "label": "A",
+                "text": "韦克斯勒智力量表"
+              },
+              {
+                "label": "B",
+                "text": "斯坦福-比奈智力量表"
+              },
+              {
+                "label": "C",
+                "text": "瑞文智力量表"
+              },
+              {
+                "label": "D",
+                "text": "比奈-西蒙智力量表"
+              }
+            ],
+            "answer": "C"
+          },
+          {
+            "index": 88,
+            "type": "单选题",
+            "content": "个性的核心（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "能力"
+              },
+              {
+                "label": "B",
+                "text": "智力"
+              },
+              {
+                "label": "C",
+                "text": "气质"
+              },
+              {
+                "label": "D",
+                "text": "性格"
+              }
+            ],
+            "answer": "D"
+          },
+          {
+            "index": 89,
+            "type": "单选题",
+            "content": "由于出乎意料的紧迫情况所引起的高度紧张的情绪状态叫（  ）。",
+            "options": [
+              {
+                "label": "A",
+                "text": "激情"
+              },
+              {
+                "label": "B",
+                "text": "应激"
+              },
+              {
+                "label": "C",
+                "text": "心境"
+              },
+              {
+                "label": "D",
+                "text": "焦虑"
+              }
+            ],
+            "answer": "B"
+          }
+        ]
+      },
+      {
+        "type": "判断题",
+        "questions": [
+          {
+            "index": 1,
+            "type": "判断题",
+            "content": "心理学是研究人的行为的科学。",
+            "answer": "×"
+          },
+          {
+            "index": 2,
+            "type": "判断题",
+            "content": "有意注意是人所特有的一种心理现象。",
+            "answer": "√"
+          },
+          {
+            "index": 3,
+            "type": "判断题",
+            "content": "个性心理特征包括能力、气质和知觉。",
+            "answer": "×"
+          },
+          {
+            "index": 4,
+            "type": "判断题",
+            "content": "无意识记是人类获得知识的主要途径。",
+            "answer": "×"
+          },
+          {
+            "index": 5,
+            "type": "判断题",
+            "content": "注意是一个独立的心理过程。",
+            "answer": "×"
+          },
+          {
+            "index": 6,
+            "type": "判断题",
+            "content": "在实验室研究中，引起变化的因素是因变量。",
+            "answer": "√"
+          },
+          {
+            "index": 7,
+            "type": "判断题",
+            "content": "年，德国人冯特在莱比锡大学出版了世界上第一本心理学著作，标志着心理学的诞生。",
+            "answer": "√"
+          },
+          {
+            "index": 8,
+            "type": "判断题",
+            "content": "人的心理是人脑对社会现实的客观反映。",
+            "answer": "√"
+          },
+          {
+            "index": 9,
+            "type": "判断题",
+            "content": "“入芝兰之室久而不闻其香，入鲍鱼之肆久而不闻其臭”是感觉补偿现象。",
+            "answer": "×"
+          },
+          {
+            "index": 10,
+            "type": "判断题",
+            "content": "心理现象不仅人有，动物也有。人和动物的心理都差不多。",
+            "answer": "×"
+          },
+          {
+            "index": 11,
+            "type": "判断题",
+            "content": "适中的动机强度最有利于问题的解决。",
+            "answer": "√"
+          },
+          {
+            "index": 12,
+            "type": "判断题",
+            "content": "刺激作用停止后，感觉并不立即消失，这是一种感觉融合现象。",
+            "answer": "×"
+          },
+          {
+            "index": 13,
+            "type": "判断题",
+            "content": "脑是心理的器官，心理是脑的机能，因此，只要有了正常人的脑，便可以产生人的心理。",
+            "answer": "×"
+          },
+          {
+            "index": 14,
+            "type": "判断题",
+            "content": "知觉也可以说是人脑对直接作用于感官的客观事物许多个别属性的反映。",
+            "answer": "×"
+          },
+          {
+            "index": 15,
+            "type": "判断题",
+            "content": "电影播放时我们能知觉为连续的活动，这是由于视觉后像的作用。",
+            "answer": "√"
+          },
+          {
+            "index": 16,
+            "type": "判断题",
+            "content": "知觉是多种感觉协同活动的结果。",
+            "answer": "×"
+          },
+          {
+            "index": 17,
+            "type": "判断题",
+            "content": "条件反射是斯金纳提出来的。",
+            "answer": "×"
+          },
+          {
+            "index": 18,
+            "type": "判断题",
+            "content": "%的学习程度会产生最佳的记忆效果。",
+            "answer": "×"
+          },
+          {
+            "index": 19,
+            "type": "判断题",
+            "content": "知觉中的对象与背景并不是绝对的，它们可以相互转换。",
+            "answer": "√"
+          },
+          {
+            "index": 20,
+            "type": "判断题",
+            "content": "记忆的保持量也会随着时间的延长而增加。",
+            "answer": "×"
+          },
+          {
+            "index": 21,
+            "type": "判断题",
+            "content": "即使刺激不完备，我们仍能保持对知觉对象的完整认识，这是因为知觉具有理解性。",
+            "answer": "×"
+          },
+          {
+            "index": 22,
+            "type": "判断题",
+            "content": "梦从本质上来说是一种无意想象。",
+            "answer": "×"
+          },
+          {
+            "index": 23,
+            "type": "判断题",
+            "content": "感受性与感觉阈限之间成正比关系。",
+            "answer": "×"
+          },
+          {
+            "index": 24,
+            "type": "判断题",
+            "content": "理想从本质上说是一种幻想。",
+            "answer": "×"
+          },
+          {
+            "index": 25,
+            "type": "判断题",
+            "content": "对象与背景的差别越大，对象越不容易被感知。",
+            "answer": "×"
+          },
+          {
+            "index": 26,
+            "type": "判断题",
+            "content": "在人类的感觉系统中，听觉具有主导地位。",
+            "answer": "×"
+          },
+          {
+            "index": 27,
+            "type": "判断题",
+            "content": "人们在解决问题时的动机越强，效果越好。",
+            "answer": "×"
+          },
+          {
+            "index": 28,
+            "type": "判断题",
+            "content": "只要人体的眼睛、鼻子、耳朵等感受器是完好的，就能产生视觉、嗅觉和听觉等感觉。",
+            "answer": "×"
+          },
+          {
+            "index": 29,
+            "type": "判断题",
+            "content": "人的各种感受性的提高，具有极大的潜力，通过实践训练可以得到很大发展。",
+            "answer": "√"
+          },
+          {
+            "index": 30,
+            "type": "判断题",
+            "content": "世界观是人格倾向性的最高层次，是个人行为的最高调节器。",
+            "answer": "√"
+          },
+          {
+            "index": 31,
+            "type": "判断题",
+            "content": "感觉阈限越大，说明感受性越强。",
+            "answer": "×"
+          },
+          {
+            "index": 32,
+            "type": "判断题",
+            "content": "从阳光下进入暗室，会突然觉得什么都看不见，但过一会就好多了。这是使感受性提高的暗适应。",
+            "answer": "√"
+          },
+          {
+            "index": 33,
+            "type": "判断题",
+            "content": "事情的不确定性是产生焦虑的根源。",
+            "answer": "√"
+          },
+          {
+            "index": 34,
+            "type": "判断题",
+            "content": "知觉的恒常性是指任何对象的知觉映象永远不变。",
+            "answer": "×"
+          },
+          {
+            "index": 35,
+            "type": "判断题",
+            "content": "“忧者见之而忧，喜者见之而喜”说的是心境。",
+            "answer": "√"
+          },
+          {
+            "index": 36,
+            "type": "判断题",
+            "content": "记忆所反映的过去经验必须是个人经历过的事物。",
+            "answer": "√"
+          },
+          {
+            "index": 37,
+            "type": "判断题",
+            "content": "个体保存经验最简便、最经济的形式是语言逻辑记忆。",
+            "answer": "√"
+          },
+          {
+            "index": 38,
+            "type": "判断题",
+            "content": "心理卫生工作三级预防的对象是轻度心理异常。",
+            "answer": "×"
+          },
+          {
+            "index": 39,
+            "type": "判断题",
+            "content": "感觉记忆的迅速消失是因为刺激物迅速消失的缘故。",
+            "answer": "×"
+          },
+          {
+            "index": 40,
+            "type": "判断题",
+            "content": "短时记忆由感觉记忆发展起来的，所以，短时记忆比感觉记忆的保持量大。",
+            "answer": "×"
+          },
+          {
+            "index": 41,
+            "type": "判断题",
+            "content": "心理卫生二级预防的对象是严重的心理异常者。",
+            "answer": "×"
+          },
+          {
+            "index": 42,
+            "type": "判断题",
+            "content": "对短时记忆内容的加工处理并不是长时记忆内容的唯一来源，但却是最主要的来源。",
+            "answer": "√"
+          },
+          {
+            "index": 43,
+            "type": "判断题",
+            "content": "性格有好坏之分。",
+            "answer": "√"
+          },
+          {
+            "index": 44,
+            "type": "判断题",
+            "content": "再认和重现的关系，犹如识记和保持的关系一样，是属于记忆过程中两个完全不同的基本过程或基本环节。",
+            "answer": "×"
+          },
+          {
+            "index": 45,
+            "type": "判断题",
+            "content": "无意识记的本质是没有记忆。",
+            "answer": "×"
+          },
+          {
+            "index": 46,
+            "type": "判断题",
+            "content": "气质没有好坏之分。",
+            "answer": "√"
+          },
+          {
+            "index": 47,
+            "type": "判断题",
+            "content": "由于无意识记表现出极大的偶然性和片段性，所以，在教学中要尽量防止无意识记的参与。",
+            "answer": "×"
+          },
+          {
+            "index": 48,
+            "type": "判断题",
+            "content": "梦是无意想象的一种极端表现。",
+            "answer": "√"
+          },
+          {
+            "index": 49,
+            "type": "判断题",
+            "content": "错觉是对客观事物的不正确的知觉。",
+            "answer": "√"
+          },
+          {
+            "index": 50,
+            "type": "判断题",
+            "content": "能再认的不一定能重现，能重现的一般都能再认。",
+            "answer": "√"
+          },
+          {
+            "index": 51,
+            "type": "判断题",
+            "content": "错觉是一种对刺激的主观歪曲的知觉。",
+            "answer": "√"
+          },
+          {
+            "index": 52,
+            "type": "判断题",
+            "content": "不同性质的材料具有不同的遗忘曲线，艾宾浩斯曲线只是众多曲线中的一条。",
+            "answer": "√"
+          },
+          {
+            "index": 53,
+            "type": "判断题",
+            "content": "在材料难度、数量、结构形式相近的情况下，集中复习的效果优于分散复习的效果。",
+            "answer": "×"
+          },
+          {
+            "index": 54,
+            "type": "判断题",
+            "content": "注意的稳定性是注意在对象上的特征。",
+            "answer": "×"
+          },
+          {
+            "index": 55,
+            "type": "判断题",
+            "content": "机械识记的效果优于意义识记 。",
+            "answer": "×"
+          },
+          {
+            "index": 56,
+            "type": "判断题",
+            "content": "天生的盲人也可以有视觉表象。",
+            "answer": "×"
+          },
+          {
+            "index": 57,
+            "type": "判断题",
+            "content": "注意的分配是有条件的。",
+            "answer": "√"
+          },
+          {
+            "index": 58,
+            "type": "判断题",
+            "content": "注意的稳定性是指人的心理活动永久地保持在一个对象上。",
+            "answer": "×"
+          },
+          {
+            "index": 59,
+            "type": "判断题",
+            "content": "理想是人格心理特征的内容。",
+            "answer": "×"
+          },
+          {
+            "index": 60,
+            "type": "判断题",
+            "content": "汽车司机在驾驶时，能熟练地做到眼、耳、手、脚并用，这种注意特性是注意分散。",
+            "answer": "×"
+          },
+          {
+            "index": 61,
+            "type": "判断题",
+            "content": "如果没有注意的转移，也就难以保持注意的稳定。",
+            "answer": "√"
+          },
+          {
+            "index": 62,
+            "type": "判断题",
+            "content": "气质是人格倾向性的内容。",
+            "answer": "×"
+          },
+          {
+            "index": 63,
+            "type": "判断题",
+            "content": "目的、任务是影响无意注意的重要因素。",
+            "answer": "×"
+          },
+          {
+            "index": 64,
+            "type": "判断题",
+            "content": "有意后注意是事先有预定的目的，但不需要付出意志努力的注意，因此有意后注意是最容易形成的注意。",
+            "answer": "×"
+          },
+          {
+            "index": 65,
+            "type": "判断题",
+            "content": "通过观察人注意的外部表现，完全可以准确客观地判断其内部的注意状态。",
+            "answer": "×"
+          },
+          {
+            "index": 66,
+            "type": "判断题",
+            "content": "意志对行为的调节表现在发动和抑制两个方面。",
+            "answer": "√"
+          },
+          {
+            "index": 67,
+            "type": "判断题",
+            "content": "抽象与概括都是建立在分析的基础之上的。",
+            "answer": "√"
+          },
+          {
+            "index": 68,
+            "type": "判断题",
+            "content": "注意的分配不受所从事的活动的熟练程度的影响。",
+            "answer": "×"
+          },
+          {
+            "index": 69,
+            "type": "判断题",
+            "content": "想象是人脑对客观现实的反映 。",
+            "answer": "√"
+          },
+          {
+            "index": 70,
+            "type": "判断题",
+            "content": "大家正专心地看书，突然一个人尖叫了一声，大家一下都把目光投向了他，结果造成了注意的转移。",
+            "answer": "×"
+          },
+          {
+            "index": 71,
+            "type": "判断题",
+            "content": "随意运动是意志行动的基础。",
+            "answer": "×"
+          },
+          {
+            "index": 72,
+            "type": "判断题",
+            "content": "想象产生的新形象是对记忆表象进行加工改造的结果。",
+            "answer": "√"
+          },
+          {
+            "index": 73,
+            "type": "判断题",
+            "content": "由于想象的内容往往出现在现实以前，所以，在一定程度上可以说它不是对客观现实的反映。",
+            "answer": "×"
+          },
+          {
+            "index": 74,
+            "type": "判断题",
+            "content": "激情状态下人的认识活动的范围缩小，自控能力减弱。",
+            "answer": "√"
+          },
+          {
+            "index": 75,
+            "type": "判断题",
+            "content": "梦是一种消极的无意想象。",
+            "answer": "×"
+          },
+          {
+            "index": 76,
+            "type": "判断题",
+            "content": "情绪和情感能够推动人类从事各种活动。",
+            "answer": "√"
+          },
+          {
+            "index": 77,
+            "type": "判断题",
+            "content": "“夜来风雨声，花落知多少。”说的是思维的概括性。",
+            "answer": "×"
+          },
+          {
+            "index": 78,
+            "type": "判断题",
+            "content": "在知觉中，由于知识经验的参与，知觉会因知觉的距离、光亮等物理条件的变化而改变。",
+            "answer": "√"
+          },
+          {
+            "index": 79,
+            "type": "判断题",
+            "content": "中年是成才和创造发明的最佳年龄。",
+            "answer": "√"
+          },
+          {
+            "index": 80,
+            "type": "判断题",
+            "content": "情绪、情感是人和动物共有的。",
+            "answer": "×"
+          },
+          {
+            "index": 81,
+            "type": "判断题",
+            "content": "创造想象与再造想象最主要的区别在于有无创造性.",
+            "answer": "×"
+          },
+          {
+            "index": 82,
+            "type": "判断题",
+            "content": "智力是天生的，跟后天的教育没有关系。",
+            "answer": "×"
+          },
+          {
+            "index": 83,
+            "type": "判断题",
+            "content": "遗传因素对人格作用程度因人格特征的不同而异。",
+            "answer": "√"
+          },
+          {
+            "index": 84,
+            "type": "判断题",
+            "content": "知识学得越多，智力就越高。",
+            "answer": "×"
+          },
+          {
+            "index": 85,
+            "type": "判断题",
+            "content": "智力越高，创造力越高。",
+            "answer": "×"
+          },
+          {
+            "index": 86,
+            "type": "判断题",
+            "content": "常言道：“人心莫测”，可见人的心理活动是不可能测量的。",
+            "answer": "×"
+          },
+          {
+            "index": 87,
+            "type": "判断题",
+            "content": "气质不能决定一个人智力发展的水平。",
+            "answer": "√"
+          },
+          {
+            "index": 88,
+            "type": "判断题",
+            "content": "不同气质类型的人不能形成相同的性格特征。",
+            "answer": "×"
+          },
+          {
+            "index": 89,
+            "type": "判断题",
+            "content": "气质类型不是一时就能改变的，其实也不需要改变。",
+            "answer": "×"
+          },
+          {
+            "index": 90,
+            "type": "判断题",
+            "content": "气质具有天赋性，所以一个人的气质是永远不变的。",
+            "answer": "×"
+          },
+          {
+            "index": 91,
+            "type": "判断题",
+            "content": "气质可以影响人的活动特点和效率，但不能完全决定一个人的活动的社会价值与成就。",
+            "answer": "√"
+          },
+          {
+            "index": 92,
+            "type": "判断题",
+            "content": "不同气质类型的学生在形成某种优良个性品质的难易程度是不同的。",
+            "answer": "√"
+          },
+          {
+            "index": 93,
+            "type": "判断题",
+            "content": "气质有时会随活动内容的不同而表现出不同的特征。",
+            "answer": "√"
+          },
+          {
+            "index": 94,
+            "type": "判断题",
+            "content": "社会实践会在一定程度上影响气质。",
+            "answer": "√"
+          },
+          {
+            "index": 95,
+            "type": "判断题",
+            "content": "多血质比抑郁质好。",
+            "answer": "×"
+          },
+          {
+            "index": 96,
+            "type": "判断题",
+            "content": "早期经验单独对人格起决定作用。",
+            "answer": "×"
+          },
+          {
+            "index": 97,
+            "type": "判断题",
+            "content": "气质类型会影响性格的表现方式。",
+            "answer": "×"
+          },
+          {
+            "index": 98,
+            "type": "判断题",
+            "content": "和性格相比，气质更多地受到生理因素的影响。",
+            "answer": "√"
+          },
+          {
+            "index": 99,
+            "type": "判断题",
+            "content": "性格的可塑性要大于气质。",
+            "answer": "√"
+          },
+          {
+            "index": 100,
+            "type": "判断题",
+            "content": "气质具有天赋性，“江山易改，秉性难移”。因此，气质是不能改变的。",
+            "answer": "×"
+          },
+          {
+            "index": 101,
+            "type": "判断题",
+            "content": "俗话说秉性难移，所以人的性格是难以改变的。",
+            "answer": "×"
+          },
+          {
+            "index": 102,
+            "type": "判断题",
+            "content": "由于性格结构具有完整性的特点，所以了解一个人的某一种特征，就可能测出其他有关的特征。",
+            "answer": "√"
+          },
+          {
+            "index": 103,
+            "type": "判断题",
+            "content": "个性中最难以改变的成份就是人的性格。",
+            "answer": "×"
+          },
+          {
+            "index": 104,
+            "type": "判断题",
+            "content": "个性中具有核心意义，最显著的标志是气质。",
+            "answer": "×"
+          }
+        ]
+      },
+      {
+        "type": "名词解释",
+        "questions": [
+          {
+            "index": 1,
+            "type": "名词解释",
+            "content": "心理学",
+            "answer": "心理学是研究人的心理活动及其发生、发展规律的科学。"
+          },
+          {
+            "index": 2,
+            "type": "名词解释",
+            "content": "客观性原则",
+            "answer": "客观性原则是研究者要尊重客观事实，按照事物的本来面貌来反映事物。"
+          },
+          {
+            "index": 3,
+            "type": "名词解释",
+            "content": "调查法",
+            "answer": "是指就某一问题要求被调查者回答其想法或做法，以此来分析、推测其心理倾向的研究方法。"
+          },
+          {
+            "index": 4,
+            "type": "名词解释",
+            "content": "测验法",
+            "answer": "测验法是指用标准化量表对个体的心理特征进行量化的研究方法。"
+          },
+          {
+            "index": 5,
+            "type": "名词解释",
+            "content": "反射",
+            "answer": "反射是神经系统活动最基本的方式，是有机体的中枢神经系统对一定的外界刺激所作的有规律的应答。"
+          },
+          {
+            "index": 6,
+            "type": "名词解释",
+            "content": "注意",
+            "answer": "是心理活动对一定对象的指向和集中，它是心理过程的动力特征之一。"
+          },
+          {
+            "index": 7,
+            "type": "名词解释",
+            "content": "无意注意",
+            "answer": "也称不随意注意，是没有预定目的、无需意志努力、不由自主地对一定事物所发生的注意。"
+          },
+          {
+            "index": 8,
+            "type": "名词解释",
+            "content": "有意注意",
+            "answer": "也称随意注意，是有预先目的、必要时需要意志努力、主动地对一定事物所发生的注意。"
+          },
+          {
+            "index": 9,
+            "type": "名词解释",
+            "content": "有意后注意",
+            "answer": "指事前有预定目的，不需要意志努力的注意。"
+          },
+          {
+            "index": 10,
+            "type": "名词解释",
+            "content": "注意的范围",
+            "answer": "也称注意的广度，是指在同一时间内，人们能够同样清楚地知觉出来的对象的数目。"
+          },
+          {
+            "index": 11,
+            "type": "名词解释",
+            "content": "注意的稳定性",
+            "answer": "是指注意能够集中在一定对象上的持续时间。"
+          },
+          {
+            "index": 12,
+            "type": "名词解释",
+            "content": "感觉",
+            "answer": "感觉是人脑对直接作用于感觉器官的客观事物个别属性的反映。"
+          },
+          {
+            "index": 13,
+            "type": "名词解释",
+            "content": "知觉",
+            "answer": "知觉是人对事物的各种属性、各个部分以及它们之间关系的综合的、整体的直接反映。"
+          },
+          {
+            "index": 14,
+            "type": "名词解释",
+            "content": "记忆",
+            "answer": "记忆是经验的印留、保持和再作用的过程，是个体对过去经历过的事物的反映。"
+          },
+          {
+            "index": 15,
+            "type": "名词解释",
+            "content": "保持",
+            "answer": "保持是人的知识、经验在头脑中的贮存过程。"
+          },
+          {
+            "index": 16,
+            "type": "名词解释",
+            "content": "遗忘",
+            "answer": "遗忘就是指对识记过的材料不能回忆或再认，或者表现为错误的回忆或再认。"
+          },
+          {
+            "index": 17,
+            "type": "名词解释",
+            "content": "回忆",
+            "answer": "回忆是指经历过的事物不在眼前，在一定条件下能把它重新再现出来。"
+          },
+          {
+            "index": 18,
+            "type": "名词解释",
+            "content": "再认",
+            "answer": "再认是指曾经接触过的事物再出现时能够识别出来。"
+          },
+          {
+            "index": 19,
+            "type": "名词解释",
+            "content": "想象",
+            "answer": "想象是人脑对已储存的表象加工改造形成新形象的过程。"
+          },
+          {
+            "index": 20,
+            "type": "名词解释",
+            "content": "再造想象",
+            "answer": "是根据言语捆或图形等的提示形成相应的新形象的过程。"
+          },
+          {
+            "index": 21,
+            "type": "名词解释",
+            "content": "创造想象",
+            "answer": "是按照一定目的、任务，使用自己以往积累的表象，在头脑中独立地创造出新形象的过程。"
+          },
+          {
+            "index": 22,
+            "type": "名词解释",
+            "content": "功能固着",
+            "answer": "人们把某种功能赋予某种物体的倾向。"
+          },
+          {
+            "index": 23,
+            "type": "名词解释",
+            "content": "思维",
+            "answer": "思维是人脑对客观事物本质属性与规律的概括的间接的反映。"
+          },
+          {
+            "index": 24,
+            "type": "名词解释",
+            "content": "道德感",
+            "answer": "道德感是人们运用一定的道德标准评价自身或他人行为时所产生的一种情感体验。"
+          },
+          {
+            "index": 25,
+            "type": "名词解释",
+            "content": "美感",
+            "answer": "美感是人对客观事物或对象的美的特征的情感体验。"
+          },
+          {
+            "index": 26,
+            "type": "名词解释",
+            "content": "理智感",
+            "answer": "理智感是人对认识活动成就进行评价时产生的情感体验。"
+          },
+          {
+            "index": 27,
+            "type": "名词解释",
+            "content": "动机",
+            "answer": "是激发和维持个体的活动，并使活动朝向一定的目标的心理动力。"
+          },
+          {
+            "index": 28,
+            "type": "名词解释",
+            "content": "需要",
+            "answer": "是个体生理的和社会的要求的反映，是个体生理的和社会的一种缺失状态。"
+          },
+          {
+            "index": 29,
+            "type": "名词解释",
+            "content": "智力",
+            "answer": "“是一般的心理能力，与其他事物一样，包括推理、计划、问题解决、抽象思维、理解复杂思想、快速学习和从经验中学习等能力”。"
+          },
+          {
+            "index": 30,
+            "type": "名词解释",
+            "content": "气质",
+            "answer": "气质是个体典型而稳定的心理活动的动力特征。"
+          },
+          {
+            "index": 31,
+            "type": "名词解释",
+            "content": "性格",
+            "answer": "是个体稳固态度和习惯性行为方式方面的个性心理特征。"
+          },
+          {
+            "index": 32,
+            "type": "名词解释",
+            "content": "迁移",
+            "answer": "指一种学习对另一种学习的影响，或已经获得知识经验对完成其他活动的影响。"
+          },
+          {
+            "index": 33,
+            "type": "名词解释",
+            "content": "人格",
+            "answer": "是构成一个人思想、情感及行为的特有模式，这个独特模式包含了一个人区别于他人的稳定而统一的心理品质。"
+          }
+        ]
+      },
+      {
+        "type": "简答题",
+        "questions": [
+          {
+            "index": 1,
+            "type": "简答题",
+            "content": "人的心理现象包括哪些范围?",
+            "answer": "人的心理现象是复杂多样的，主要包括既紧密联系又相互区别的心理过程和个性两个方面。心理过程是心理活动的——种动态过程，是人脑对客观现实的反映过程，主要有认识过程、情绪情感过程、意志过程。这三者是不可分割的，统一在人的行为活动之中。个性是人的整个精神(或心理)面貌，即具有一定倾向性的各种心理特征的总和。个性包括个性倾向性、个性心理特征。"
+          },
+          {
+            "index": 2,
+            "type": "简答题",
+            "content": "简述马斯洛需要层次理论？",
+            "answer": "1)第一层次：生理上的需要"
+          },
+          {
+            "index": 3,
+            "type": "简答题",
+            "content": "呼吸、水、食物、睡眠 、生理平衡、分泌、性    \n2)第二层次：安全上的需要\n人身安全、健康保障、资源所有性、财产所有性、道德保障、工作职位保障 、家庭安全\n3)第三层次：情感和归属的需要\n友情、爱情、性亲密\n4)第四层次：尊重的需要\n自我尊重、信心、成就 、对他人尊重、被他人尊重\n5)第五层次：自我实现的需要\n道德 、创造力 、自觉性、问题解决能力、公正度、 接受现实能力   \n注意有哪些功能作用?",
+            "answer": "注意有如下功能：①选择性功能，即选择指向那些有意义的、符合需要的与当前活动相一致的对象，避开无关的、无意义的、多余的对象干扰；②保持功能，即使注意对象在意识中得到清晰、准确、持久而集中的反映；③调节与监督功能，即意识对人所从事的活动进行监控，这有利于注意的准确与精确，又有利于对错误的调整、修正与纠正；④注意还能通过想象活动产生对将来的活动进行期待与预见的作用。"
+          },
+          {
+            "index": 4,
+            "type": "简答题",
+            "content": "影响无意注意的客观因素有哪些?",
+            "answer": "①刺激物的新异性，新颖、奇怪、陌生的对象易引起不随意注意。②刺激物的强度，绝对强度和相对强度较强时都易影响不随意注意，在阈限范围内，刺激物越强(如强声、强光等)越易引起无意注意。③刺激物的对比关系(对象与背景差异)明显易引起不随意注意。④刺激物的活动性或变化性，如活动的直观教具、活动的广告等易引起人们的不随意注意。"
+          },
+          {
+            "index": 5,
+            "type": "简答题",
+            "content": "引起和保持有意注意的条件和方法有哪些?",
+            "answer": "1)加深对活动的目的、任务的理解。"
+          },
+          {
+            "index": 6,
+            "type": "简答题",
+            "content": ")培养间接兴趣\n3)合理的组织活动\n4)用坚强意志与干扰作斗争\n感觉、知觉?二者有何区别与联系?",
+            "answer": "感觉是人脑对直接作用于感官的客观事物的个别属性的反映；知觉是在感觉的基础上产生的，它是人脑对直接作用于感官的客观事物进行综合整体的反映。"
+          },
+          {
+            "index": 7,
+            "type": "简答题",
+            "content": "感觉、知觉二者是紧密联系又相互区别的。从联系来看：①二者都是直接的反映、都是感性认识过程；②感觉是知觉的基础，知觉是感觉的进——步发展，二者紧密交织在一起，通常以感知觉形式出现，除新生儿或婴儿有某些单纯感觉之外，在儿童或成人身上均以交织在一起的感知形式出现。从区别来看：①感觉反映的是事物个别属性.知觉反映的是事物整体；②感觉的生理机制是单一分析器的活动，知觉是多种分析器协同活动的结果；③经验在感觉中可有可无，只起一被作用，经验在知觉中是必备条件.缺乏知识经验，就没有知觉现象产生。\n知觉的基本特性有哪些?",
+            "answer": "知觉的基本特性有如下几种：①知觉的选择性，优先把对象从背景中挑选出来的特性；②知觉的整体性，能将局部特征和个别属性联合为整体的知觉特性；③知觉理解性，利用已有知识经验解释知觉的对象，并用词语标志的特性；④知觉恒常性，即知觉条件在一定范围内变化、知觉映象仍保持相对不变的特性。"
+          },
+          {
+            "index": 8,
+            "type": "简答题",
+            "content": "如何培养学生的学习动机？",
+            "answer": "第一要尊重学生的个体差异，帮助学生建立学习的自信心"
+          },
+          {
+            "index": 9,
+            "type": "简答题",
+            "content": "第二要加强学习目的教育，帮助学生明确学习的目的和意义\n第三要加强职业指导，帮助学生了解社会各职业领域的性质和特点\n记忆过程包括哪些环节?",
+            "answer": "记忆过程包括“记”(识记和保持)和“忆”(再认或回忆)的完整过程。从信息加工的观点看，记忆包括信息输入与编码、信息储存和信息提取三个有序而完整的过程。"
+          },
+          {
+            "index": 10,
+            "type": "简答题",
+            "content": "结合相关理论，谈谈如何提高记忆的效率？",
+            "answer": "艾宾浩斯认为，遗忘的进程是不均衡的，遗忘速度先快后慢，遗忘数量先多后少。"
+          },
+          {
+            "index": 11,
+            "type": "简答题",
+            "content": "(一)及时复习\n(二)合理分配复习时间\n(三)反复阅读和试图回忆相结合\n(四)采用多样化的复习方法，动员多种感官参加复习\n(五)活动有助于记忆\n简述影响遗忘进程的相关因素?",
+            "answer": "1)识记材料的意义和作用对遗忘进程的影响"
+          },
+          {
+            "index": 12,
+            "type": "简答题",
+            "content": ")识记材料的性质对遗忘进程的影响\n3)实际材料的数量对遗忘进程的影响\n4)学习程度对遗忘进程的影响\n5)识记材料的系列位置对遗忘进程的影响\n想象分哪些种类?",
+            "answer": "1)从有无目的性来看，可分有意想象和无意想象两种。"
+          },
+          {
+            "index": 13,
+            "type": "简答题",
+            "content": ")从想象活动的独立与创新程度来看，可分再造想象与创造想象两种。\n    3)从想象与现实的关系看，可分幻想、理想、空想。\n影响创造想象有哪些因素?",
+            "answer": "①创造需要、愿望与社会活动要求相结合，转化为创造动机，从而成为推动人的创造思维和创造想象的动力系统。②原型与原型启发是激发创造的起点。绝大多数的创造发明都是在原型基础上，经过联想作用，才创造了新事物的形象。如人发明船就是借助了“鱼的原型”。③积极的思维活动是创造想象产生的关键。只有通过积极的思维活动，才能创造出独特、新颖、有益于社会的新产品。艺术家的创造过程都是积极思维构想的结果。④灵感和艰巨劳动是创造思维与创造活动的重要条件，灵感是对艰巨劳动的奖赏，文学家、艺术家、科学家的创造想象与创作产品都不可能没有灵感。"
+          },
+          {
+            "index": 14,
+            "type": "简答题",
+            "content": "思维的过程包括哪些环节?",
+            "answer": "思维的基本过程包括：①分析与综合过程，是认识活动的最基本过程，也是思维的基本过程，其余过程均由此派生出来的。②比较过程，在头脑中通过对比来确定事物之间异同点和关系的思维过程。③抽象与概括过程，是在人脑中提取出事物的共同的、本质的特征，并把这些本质特征联合在一起的过程。这是人类特有的思维的重要过程。④系统化与具体化过程，系统化是按照本质特征对事物分类与归类.形成完整体系的过程；具体化是—般概念与规律的实际运用过程。"
+          },
+          {
+            "index": 15,
+            "type": "简答题",
+            "content": "创造性思维的特点\n1)既需要发散思维，又需要集中思维 \n2)创造性思维没有现成答案\n3)迷恋和目的指向性是创造性思维的重要特征\n4)灵感状态\n5)创造性思维需要创造性想象的参与\n思维有哪几种基本形式?",
+            "answer": "思维的基本形式是：①概念——是事物的共同、本质特征在人脑中的反映。通常人们用词语来标志事物的概念。概念包括内涵与外延两个部分，两者是反比关系。②判断——是概念之间联系或关系在人脑中的反映。判断主要有肯定与否定之分；直接与间接之分；相对与绝对之分。③推理——是一种间接判断，它是判断和判断之间的联系和关系的反映，其主要有归纳推理和演绎推理两种基本形式。"
+          },
+          {
+            "index": 16,
+            "type": "简答题",
+            "content": "简述动机强度和活动效率之间的关系\n 一般来讲，动机强度与活动效率之间的关系大致呈倒U型曲线，即中等强度的动机，活动效率最高。动机强度过低或过高，均会导致活动效率下降。如，考试中的“怯场”就是因为动机过强造成的。但如动机不足，也会出现工作效率不高等问题。\n简述情绪、情感的关系？",
+            "answer": "1)情绪、情感有什么区别?"
+          },
+          {
+            "index": 17,
+            "type": "简答题",
+            "content": "情绪与情感的区别\n(1)情绪的生理性和情感的社会性。\n(2)就人类个体而言，情绪发展在先，情感体验产生于后。\n(3)与情感相比，情绪不稳定。\n(4)情绪表现的外显性和情感表现的内在性。\n2)情绪与情感的联系\n(1)情绪是情感的基础，情感离不开情绪。情感是在情绪的稳定固着基础上发展建立起来的，情感通过情绪的形式表达出来。\n(2)对人类而言，情绪离不开情感，是情感的具体表现。情感的深度决定着情绪表现的强度，情感的性质决定了在一定情境下情绪表现的形式。情绪发生过程中往往深含着情感因素。\n情绪调节的方法有哪些？",
+            "answer": "(1)呼吸、放松训练法"
+          },
+          {
+            "index": 18,
+            "type": "简答题",
+            "content": "(2)发泄疗法\n(3)认知疗法\n(4)音乐调节法\n(5)颜色调节法\n情绪情感同认识过程的关系如何?",
+            "answer": "情绪、情感同认识过程是紧密联系而又相互区别的两个独立的心理过程。从二者联系来看：①认识过程是情绪、情感产生的前提与基础，人有了对事物本身属性的认识，才可能有主客体之间需求关系的反映，从而产生情绪与情感。②感知、记忆、思维、想象等全部认识过程都和情绪、情感相联系，认识不仅是产生情绪、情感的基础，也是影响、控制、调节情绪情感的重要因素。人对客观对象及环境的认知比较、判断和评价不同，其情绪状态与行为也不一样。③情绪、情感也影响人的认识活动，对人的认识产生动力或阻力性作用。从二者区别来看：①认识过程反映了客观事物本身的属性、特点和内部运动规律，而情绪、情感过程则是反映了主客体之间的需求关系。②认识过程是通过具体形象、动作或抽象方式等，来反映客观对象；情绪、情感是通过态度体验来反映主客体间的关系，机体变化明显。③认识过程的随意性较强，可以随意开始或停止某种认识，情绪、情感只有通道认识活动，才具有某些随意的性质。"
+          },
+          {
+            "index": 19,
+            "type": "简答题",
+            "content": "简述意志的特征？",
+            "answer": "1)明确自觉的目的性"
+          },
+          {
+            "index": 20,
+            "type": "简答题",
+            "content": ")以随意动作为基础  \n3与克服困难相联系\n气质对教育工作的意义\n    教师要了解学生的气质特征和气质类型，做到“一把钥匙开一把锁”，采取有效的教育策略提高教育效果。\n动机分哪些种类?",
+            "answer": "动机分类的标准与依据不同，其种类也不一样：①根据动机的起源不同，有生理性动机与社会性动机之分；②根据动机的性质相社会价值不同，有高尚动机与低级动机之分；③根据动机的影响范围和持续作用时间的长短不同，可分为长远的、间接的动机与暂时的、直接的动机；④根据动机在活动中作用的大小不同，有主导动机与辅助动机之分。"
+          },
+          {
+            "index": 21,
+            "type": "简答题",
+            "content": "简述人格的特征？",
+            "answer": "1)人格的整体性(统合性)"
+          },
+          {
+            "index": 22,
+            "type": "简答题",
+            "content": ")人格的稳定性和可塑性\n3)人格的独特性\n4)人格的社会性和生物性\n气质有哪些动力性特征？",
+            "answer": "①心理和行为活动的强度特征，通常用神经活动过程的强度来表示。②心理和行为反应的速度持征。③心理和行为反应的灵活性特征，常用神经活动过程转移快慢来表示。④心理和行为的内外倾向性特征。"
+          },
+          {
+            "index": 23,
+            "type": "简答题",
+            "content": "简述粘液质这一气质类型的主要特征？",
+            "answer": "感受性底而耐受性高，不随意反应性和情绪兴奋性均低，明显内向，外部表现少，反应速度慢而具有稳定性。不易兴奋但很持久平衡的气质。安静稳重、沉默寡言、喜欢沉思、表情平淡、情绪不易外露。外表似乎给人“冷”的感觉，但内心却很“热”自制力很强、不怕困难，忍耐性高，表现出内刚外柔与人交往适度，交情深厚，朋友少但却常有知心朋友。学习时接受知识不会很快，行为主动性比较差，经常是别人让他们去做某事才会去做。"
+          },
+          {
+            "index": 24,
+            "type": "简答题",
+            "content": "气质有哪些典型类型？各有什么行为特征?",
+            "answer": "多血质、胆汁质、粘液质、抑郁质四种。其特征分别如下：①多血质者的神经类型是“强、平街、灵活型”，其反应迅速，情绪发生快而多变，动作敏捷灵活、活泼好动，喜欢与人交往，注意易转移，情趣易变化。②胆汁质者的神经类型是“强、不平衡型”，其反应快但不灵活，情绪易冲动，性情暴躁，可塑性小。③粘液质者的神经类型是“强、平衡、不灵活型”，其反应迟缓不灵活，稳重安静，情绪不易外露，有节制，忍耐力强，注意稳定不易转移。④抑郁质者的神经类型是“弱型”，其反应慢不灵活，情绪体验深而行为内向，善于觉察细节、怯懦、孤独，感情脆弱，易出现神经质症状。"
+          },
+          {
+            "index": 25,
+            "type": "简答题",
+            "content": "简述多血质这一气质类型的主要特征？",
+            "answer": "感受性底而耐受性高，不随意反应性强，具有外向性和可塑性，情绪兴奋性高而且外部表现明显，反应速度快而灵活。"
+          },
+          {
+            "index": 26,
+            "type": "简答题",
+            "content": "情绪丰富而外露 、喜怒哀乐皆形于色喜欢与人交往、有种“自来熟”的本事活泼、好动、乐观、灵活思维灵活、行动敏捷、对各种环境适应能力强。缺乏耐心和毅力、稳定性差、见异思迁。\n气质与性格有何区别与联系?",
+            "answer": "气质和性格是紧密联系而又相互区别的。其联系方面有：①二者都是人的个性心理特征，都具有稳定和个别差异性的特点。②二者是相互联系、相互作用、相互影响的。③气质能影响性格形成的快慢，在性格上打上气质的烙印与色彩。性格也能逐渐改变人的气质。其区别在于：①气质是不受内容制约的动力性特征，性格是态度和行为的特点；②气质是带自然性的个性心理特征；性格是社会性个性心理特征；③气质无好坏社会评价，性格有好坏社会评价意义；④相对而言气质的可塑性小，性格可塑性大；⑤年龄越小气质起作用越大，成人后性格在个性结构中有核心意义。"
+          },
+          {
+            "index": 27,
+            "type": "简答题",
+            "content": "性格结构有哪些成分(或特征)?",
+            "answer": "答：①性格的态度特征：有对他人、集体态度；对学习、劳动、工作的态度；对自己的态度。②性格的意志特征：自觉性、自制力、果断性、坚韧性等。③性格的情绪特征：包括情绪强度、稳定性等。④性格的理智特征：含感知、记忆、思维、想象等认知方面的特点。"
+          },
+          {
+            "index": 28,
+            "type": "简答题",
+            "content": "教学中怎样组织好学生的注意？",
+            "answer": "组织好学生的注意是教学成功的一个重要条件。在教学中组织学生的注意，应做到以下几点：①唤起学生的有意注意，提高学习的自觉性。让学生明确学习的目的任务；创设“问题情境”，启迪学生的思维；教师正确组织教学，严格要求学生，建立正常教学秩序与学校常规，对唤起有意注意也起重要作用。②正确运用无意注意的规律组织教学。运用无意注意的规律，教学活动会生动有趣。在教学环境方面，要防止干扰刺激分散注意力；在教学方法上，教师讲授内容要科学、新颖、系统、生动，教师语言要生动形象、简洁流畅，适时呈现教具，用感性形象吸引学生，教学方式的变化、灵活、启迪性等课堂教学艺术，都易激发学生的兴趣与无意注意。③引导学生几种注意交替使用，有助学生注意的集中、稳定与持久。"
+          },
+          {
+            "index": 29,
+            "type": "简答题",
+            "content": "怎样培养青少年良好注意品质?",
+            "answer": "1.培养正确的学习动机和态度，提高学习的自觉性"
+          },
+          {
+            "index": 30,
+            "type": "简答题",
+            "content": "培养广阔而稳定的兴趣\n3.加强意志锻炼\n4.养成良好的注意习惯\n试述记忆的品质\n(1)识记的敏捷性。\n(2)保持的持久性。\n(3)记忆的正确性。\n(4)记忆的准备性。 \n学生良好思维品质结构有哪些特点?",
+            "answer": "学生良好思维品质结构有如下特点：①思维的广阔性和深刻性；②思维的独立性与批判性；③思维的逻辑性；④思维的灵活性和敏捷性；⑤思维的创造性。"
+          },
+          {
+            "index": 31,
+            "type": "简答题",
+            "content": "如何利用思维规律开展教学工作?",
+            "answer": "1.创设问题情境，激发学生积极思维"
+          },
+          {
+            "index": 32,
+            "type": "简答题",
+            "content": "帮助学生掌握解决问题的思维步骤与方法\n3.利用迁移的积极影响，克服某些定势的消极作用\n4.调控解决问题时的心理状态\n5.加强学生的言语训练\n6.培养学生良好的思维品质\n试分析影响解决问题的因素有哪些?",
+            "answer": "答：1)问题情境与问题的表述。"
+          },
+          {
+            "index": 33,
+            "type": "简答题",
+            "content": ")动机与情绪状态。 \n3)联想与原型启示。 \n4)定势的作用。\n5)功能固着\n6)知识和技能的迁移作用。\n7)个性与良好思维品质对解决问题有重要的作用。 \n结合创造性思维的特点 ，谈谈如何培养 学生的创造性思维？",
+            "answer": "创造性思维是指有创见的思维。它有如下四个特点。"
+          },
+          {
+            "index": 34,
+            "type": "简答题",
+            "content": "发散思维和集中思维的统一\n2.多有直觉思维出现\n3.创造想象参与\n4.多有灵感出现\n如何运用记忆规律,加强记忆效果\n心理学家艾宾浩斯经过实验研究表明，遗忘具有先快后慢的规律,表明人类的遗忘不是均速进行的，刚学过以后在短时间内的遗忘比较快，量也比较多,随着时间的消逝，遗忘逐渐缓慢下来，到了一定时间，几乎就不再遗忘了。\n那么根据这一规律，我们如何有效地组织复习呢？",
+            "answer": "1)及时复习 2)合理分配复习时间 3)反复阅读和试图回忆相结合 4)采用多样化的复习方法，动员多种感官参加复习 5)活动有助于记忆"
+          }
+        ]
+      }
+    ]
+  }
+]

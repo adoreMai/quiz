@@ -7,8 +7,8 @@
     "author": "巩颛硕",
     "university": "",
     "profession": "",
-    "questionCount": 1550,
-    "chapters": 16
+    "questionCount": 1808,
+    "chapters": 17
   },
   {
     "id": "大学语文",
@@ -43,5 +43,16 @@
       ],
       "timeMinutes": 60
     }
+  },
+  {
+    "id": "心理学",
+    "name": "心理学",
+    "shortName": "心理学",
+    "file": "subjects/心理学.json",
+    "author": "巩颛硕",
+    "university": "",
+    "profession": "",
+    "questionCount": 260,
+    "chapters": 1
   }
 ]

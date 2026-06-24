@@ -327,6 +327,7 @@ const STORAGE_KEY = 'quiz_app_data';
 // ============================================================
 let questionBank = null;
 let chapters = [];
+const CHAPTER_SKIP_TEST = '课后练习';  // skip chapters matching this in test/exam mode
 let currentMode = 'exam';
 let subjects = [];         // available subjects from subjects.json
 let currentSubject = null; // currently selected subject
@@ -731,12 +732,14 @@ function startExam() {
   appState._examScores = examScores;
   appState._examCounts = examCounts;
 
-  // Proportional sampling
-  const totalBank = questionBank.length;
+  // Proportional sampling — exclude PDF/skip chapters
+  const testBank = questionBank.filter(q => !q.chapter.includes(CHAPTER_SKIP_TEST));
+  const testChapters = chapters.filter(ch => !ch.name.includes(CHAPTER_SKIP_TEST));
+  const totalBank = testBank.length;
   const selected = [];
   for (const [qtype, target] of Object.entries(examCounts)) {
     if (target <= 0) continue;
-    const pool = questionBank.filter(q => q.type === qtype);
+    const pool = testBank.filter(q => q.type === qtype);
     // Group by chapter
     const byCh = {};
     for (const q of pool) {
@@ -745,19 +748,19 @@ function startExam() {
     }
     // Calculate proportions based on total questions per chapter
     const chProportions = {};
-    for (const ch of chapters) {
+    for (const ch of testChapters) {
       chProportions[ch.name] = ch.questions.length / totalBank;
     }
     // Allocate
     const allocated = {};
     let remaining = target;
-    for (const ch of chapters) {
+    for (const ch of testChapters) {
       const n = clamp(Math.round(target * chProportions[ch.name]), 0, (byCh[ch.name]||[]).length);
       allocated[ch.name] = Math.min(n, remaining);
       remaining -= allocated[ch.name];
     }
     // Distribute remainder to chapters with available questions
-    const chNames = chapters.map(c => c.name);
+    const chNames = testChapters.map(c => c.name);
     let ri = 0;
     while (remaining > 0 && ri < chNames.length * 3) {
       const cn = chNames[ri % chNames.length];
@@ -775,7 +778,7 @@ function startExam() {
   }
   // Add subjective questions
   if (subjCount > 0) {
-    const subjPool = questionBank.filter(q => SUBJECTIVE_TYPES.includes(q.type));
+    const subjPool = testBank.filter(q => SUBJECTIVE_TYPES.includes(q.type));
     const picked = shuffle([...subjPool]).slice(0, subjCount);
     selected.push(...picked);
   }
@@ -1159,14 +1162,17 @@ function renderTestOverview() {
   const progress = getTestProgress();
   const totalPerCh = {};
   for (const q of questionBank) { totalPerCh[q.chapter] = (totalPerCh[q.chapter]||0) + 1; }
+  // Exclude PDF/skip chapters
+  const testChapters = chapters.filter(ch => !ch.name.includes(CHAPTER_SKIP_TEST));
+  const testQCount = testChapters.reduce((s, ch) => s + ch.questions.length, 0);
 
   const m = document.getElementById('main');
   m.innerHTML = `
     <div class="panel active">
-      <div class="panel-head">逐章测试（共 ${questionBank.length} 题）</div>
+      <div class="panel-head">逐章测试（共 ${testQCount} 题）</div>
       <p class="panel-sub">按章节逐题练习，进度自动保存到本地。</p>
       <div class="ch-list">
-        ${chapters.map((ch, ci) => {
+        ${testChapters.map((ch, ci) => {
           const done = progress[ch.name] || 0;
           const total = ch.questions.length;
           const pct = Math.round(100*done/total);
@@ -1191,8 +1197,8 @@ function renderTestOverview() {
     </div>`;
 }
 
-function startTestChapter(ci, sectionFilter) {
-  const ch = chapters[ci];
+function startTestChapter(ciOrName, sectionFilter) {
+  const ch = typeof ciOrName === 'string' ? chapters.find(c => c.name === ciOrName) : chapters[ciOrName];
   if (!ch) return;
   let qs = sectionFilter ? ch.questions.filter(q => q.section === sectionFilter) : ch.questions;
   appState._testQuestions = qs;
