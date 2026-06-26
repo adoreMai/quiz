@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.0';
+const VERSION = '2.4.1';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1420,10 +1420,40 @@ function checkTestAnswer(idx) {
 }
 
 function nextTestQuestion(idx) {
-  const qs = appState._testQuestions;
+  var qs = appState._testQuestions;
+  var q = qs[idx];
+
+  // Auto-check if not confirmed yet
+  if (!appState._testShowAns) {
+    var isSubj = SUBJECTIVE_TYPES.includes(q.type);
+    var multi = q.type === '多选题';
+    var userAns = appState._testUserAns || (multi ? [] : null);
+    appState._testShowAns = true;
+
+    if (!isSubj) {
+      var correctAns = q.answer.trim();
+      var isCorrect = false;
+      if (multi) {
+        var ua = (userAns || []).sort().join('');
+        var ca = correctAns.split('').sort().join('');
+        isCorrect = ua === ca;
+      } else {
+        isCorrect = userAns === correctAns;
+      }
+      if (!isCorrect) addWrong(qid(q), q);
+      else removeWrong(qid(q));
+
+      // Wrong answer: stay on current question to show the result
+      if (!isCorrect) {
+        renderTestQuestion(idx);
+        return;
+      }
+    }
+  }
+
   // Save progress (skip for wrong-book practice and section-filtered practice)
   if (appState._testChapter !== -1 && !appState._testSection) {
-    const chName = qs[idx].chapter;
+    var chName = qs[idx].chapter;
     setTestProgress(chName, idx + 1);
   }
   // Reset answer state
