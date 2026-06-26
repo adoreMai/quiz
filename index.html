@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.3.3';
+const VERSION = '2.3.4';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1262,8 +1262,13 @@ function startTestChapter(ciOrName, sectionFilter) {
 function renderTestQuestion(idx) {
   const qs = appState._testQuestions;
   if (idx >= qs.length) {
-    toast('本章全部完成！');
-    renderTestOverview();
+    if (appState._testChapter === -1) {
+      toast('错题练习全部完成！');
+      renderWrongBook();
+    } else {
+      toast('本章全部完成！');
+      renderTestOverview();
+    }
     return;
   }
   const q = qs[idx];
@@ -1388,9 +1393,11 @@ function checkTestAnswer(idx) {
 
 function nextTestQuestion(idx) {
   const qs = appState._testQuestions;
-  // Save progress
-  const chName = qs[idx].chapter;
-  setTestProgress(chName, idx + 1);
+  // Save progress (skip for wrong-book practice: _testChapter === -1)
+  if (appState._testChapter !== -1) {
+    const chName = qs[idx].chapter;
+    setTestProgress(chName, idx + 1);
+  }
   // Reset answer state
   appState._testShowAns = false;
   appState._testUserAns = null;
