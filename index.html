@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.3.4';
+const VERSION = '2.4.0';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -361,9 +361,9 @@ let appState = {
   // exam
   examQuestions: [], examAnswers: {}, examTimeLeft: 0, examTotalTime: 0, examTimer: null, examSubmitted: false,
   // test
-  testChapterIdx: 0, testQIdx: 0, testFilterChapter: null, testFilterType: null,
+  testChapterIdx: 0, testQIdx: 0, testFilterChapter: null, testFilterType: null, _testSection: null,
   // memorize
-  memoFilterChapter: null, memoFilterType: null, memoPage: 0,
+  memoFilterChapter: null, memoFilterType: null, memoPage: 0, memoSearch: '',
   // wrong book
   wrongFilterChapter: null, wrongFilterType: null,
 };
@@ -489,7 +489,7 @@ async function switchSubject(subjectId) {
   updateSubjectDisplay();
   questionBank = null; chapters = [];
   await loadQuestionBank(currentSubject.file);
-  switchMode('exam');
+  switchMode(currentMode);
 }
 
 async function loadQuestionBank(url) {
@@ -506,9 +506,14 @@ async function loadQuestionBank(url) {
         if (!sec || !sec.questions) continue;
         for (const q of sec.questions) {
           if (!q || !q.type) continue;
+          var answer = (q.answer || '').replace(/[\n\r].*$/s, '').trim(); // strip trailing metadata lines
+          if (q.type === '判断题') {
+            if (/^[√✓对正确TrueTtYy]/.test(answer)) answer = '对';
+            else if (/^[×✗错错误FalseFfNn]/.test(answer)) answer = '错';
+          }
           const fq = {
             chapter: ch.chapter, section: sec.type || '', type: q.type,
-            content: q.content || '', options: q.options || [], answer: q.answer || '', index: q.index || 0,
+            content: q.content || '', options: q.options || [], answer: answer, index: q.index || 0,
             aiGenerated: q.aiGenerated || false,
           };
           flat.push(fq); chQs.push(fq);
@@ -811,6 +816,12 @@ function startExam() {
     selected.push(...picked);
   }
 
+  // Warn if fewer questions than requested
+  var expectedTotal = Object.values(examCounts).reduce(function(s, v) { return s + v; }, 0) + subjCount;
+  if (selected.length < expectedTotal) {
+    toast('题库不足：请求 ' + expectedTotal + ' 题，实际仅 ' + selected.length + ' 题可用');
+  }
+
   appState.examQuestions = shuffle(selected);
   renderExamQuestion(0);
 }
@@ -826,6 +837,7 @@ function startSubjectExam() {
 
   var examScores = {};
   var selected = [];
+  var scoredWarnings = [];
 
   // Extract scored questions
   (cfg.scored || []).forEach(function(entry) {
@@ -833,7 +845,8 @@ function startSubjectExam() {
     if (entry.section) {
       pool = pool.filter(function(q) { return q.section === entry.section; });
     }
-    if (pool.length === 0) return;
+    if (pool.length === 0) { scoredWarnings.push(entry.type + (entry.section ? '(' + entry.section + ')' : '') + ': 题库为空'); return; }
+    if (!entry.moduleMode && pool.length < entry.count) scoredWarnings.push(entry.type + (entry.section ? '(' + entry.section + ')' : '') + ': 请求 ' + entry.count + ' 题，仅 ' + pool.length + ' 题可用');
     if (entry.moduleMode) {
       // Module mode: pick N random chapters, extract ALL questions from their section
       var chapters = [];
@@ -866,12 +879,18 @@ function startSubjectExam() {
   });
 
   // Extract unscored questions
+  var unscoredWarnings = [];
   (cfg.unscored || []).forEach(function(entry) {
     var pool = questionBank.filter(function(q) { return q.type === entry.type; });
-    if (pool.length === 0) return;
+    if (pool.length === 0) { unscoredWarnings.push(entry.type + ': 题库为空'); return; }
+    if (pool.length < entry.count) unscoredWarnings.push(entry.type + ': 请求 ' + entry.count + ' 题，仅 ' + pool.length + ' 题可用');
     var picked = shuffle(pool.slice()).slice(0, entry.count);
     Array.prototype.push.apply(selected, picked);
   });
+
+  // Toast warnings
+  var allWarnings = scoredWarnings.concat(unscoredWarnings);
+  if (allWarnings.length) toast('题库不足：' + allWarnings.join('；'));
 
   appState._examScores = examScores;
   appState._examCounts = {}; // not used in subject mode
@@ -1143,11 +1162,13 @@ function renderExamReview() {
 // ============================================================
 function renderMemorize() {
   if (!questionBank) return;
-  const cf = appState.memoFilterChapter;
-  const tf = appState.memoFilterType;
-  const filtered = questionBank.filter(q => {
+  var cf = appState.memoFilterChapter;
+  var tf = appState.memoFilterType;
+  var kw = (appState.memoSearch || '').trim().toLowerCase();
+  var filtered = questionBank.filter(function(q) {
     if (cf && q.chapter !== cf) return false;
     if (tf && q.type !== tf) return false;
+    if (kw && q.content.toLowerCase().indexOf(kw) === -1 && q.answer.toLowerCase().indexOf(kw) === -1) return false;
     return true;
   });
 
@@ -1164,12 +1185,17 @@ function renderMemorize() {
   var start = page * MEMO_PAGE_SIZE;
   var pageQs = filtered.slice(start, start + MEMO_PAGE_SIZE);
 
+  // Windowed pagination: show ~7 pages around current
   var paginationHTML = '';
   if (totalPages > 1) {
     var pagesHTML = '';
-    for (var p = 0; p < totalPages; p++) {
+    var winStart = Math.max(0, page - 3);
+    var winEnd = Math.min(totalPages - 1, page + 3);
+    if (winStart > 0) pagesHTML += '<span class="filter-tag" style="opacity:0.5;">1</span><span style="color:var(--text3);padding:4px 2px;">…</span>';
+    for (var p = winStart; p <= winEnd; p++) {
       pagesHTML += '<span class="filter-tag' + (p === page ? ' active' : '') + '" onclick="appState.memoPage=' + p + ';renderMemorize();">' + (p + 1) + '</span>';
     }
+    if (winEnd < totalPages - 1) pagesHTML += '<span style="color:var(--text3);padding:4px 2px;">…</span><span class="filter-tag" style="opacity:0.5;">' + totalPages + '</span>';
     paginationHTML = '<div class="filter-bar" style="justify-content:center;flex-wrap:wrap;">' +
       '<span class="filter-tag" onclick="appState.memoPage=' + Math.max(0, page - 1) + ';renderMemorize();"' + (page === 0 ? ' style="opacity:0.4;"' : '') + '>← 上一页</span>' +
       pagesHTML +
@@ -1177,22 +1203,23 @@ function renderMemorize() {
       '</div>';
   }
 
-  const m = document.getElementById('main');
-  m.innerHTML = `
-    <div class="panel active">
-      <div class="panel-head">背题模式（共 ${filtered.length} 题${totalPages > 1 ? '，第 ' + (start + 1) + '-' + Math.min(start + MEMO_PAGE_SIZE, filtered.length) + ' 题' : ''}）</div>
-      <div class="filter-bar">
-        <span class="filter-tag${!cf?' active':''}" onclick="appState.memoFilterChapter=null;appState.memoPage=0;renderMemorize();">全部章节</span>
-        ${chNames.map(c => `<span class="filter-tag${cf===c?' active':''}" onclick="appState.memoFilterChapter='${escapeOnclick(c)}';appState.memoPage=0;renderMemorize();">${escapeHTML(c)}</span>`).join('')}
-      </div>
-      <div class="filter-bar">
-        <span class="filter-tag${!tf?' active':''}" onclick="appState.memoFilterType=null;appState.memoPage=0;renderMemorize();">全部题型</span>
-        ${types.map(t => `<span class="filter-tag${tf===t?' active':''}" onclick="appState.memoFilterType='${escapeOnclick(t)}';appState.memoPage=0;renderMemorize();">${escapeHTML(t)}</span>`).join('')}
-      </div>
-      ${paginationHTML}
-      <div id="memoList">${renderMemoList(pageQs)}</div>
-      ${paginationHTML}
-    </div>`;
+  var m = document.getElementById('main');
+  m.innerHTML =
+    '<div class="panel active">' +
+      '<div class="panel-head">背题模式（共 ' + filtered.length + ' 题' + (totalPages > 1 ? '，第 ' + (start + 1) + '-' + Math.min(start + MEMO_PAGE_SIZE, filtered.length) + ' 题' : '') + '）</div>' +
+      '<div style="margin-bottom:12px;"><input id="memoSearchInput" type="text" placeholder="搜索题目内容或答案…" value="' + escapeHTML(appState.memoSearch || '') + '" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;background:var(--bg);color:var(--text);" oninput="appState.memoSearch=this.value;appState.memoPage=0;renderMemorize();"></div>' +
+      '<div class="filter-bar">' +
+        '<span class="filter-tag' + (!cf ? ' active' : '') + '" onclick="appState.memoFilterChapter=null;appState.memoPage=0;renderMemorize();">全部章节</span>' +
+        chNames.map(function(c) { return '<span class="filter-tag' + (cf === c ? ' active' : '') + '" onclick="appState.memoFilterChapter=\'' + escapeOnclick(c) + '\';appState.memoPage=0;renderMemorize();">' + escapeHTML(c) + '</span>'; }).join('') +
+      '</div>' +
+      '<div class="filter-bar">' +
+        '<span class="filter-tag' + (!tf ? ' active' : '') + '" onclick="appState.memoFilterType=null;appState.memoPage=0;renderMemorize();">全部题型</span>' +
+        types.map(function(t) { return '<span class="filter-tag' + (tf === t ? ' active' : '') + '" onclick="appState.memoFilterType=\'' + escapeOnclick(t) + '\';appState.memoPage=0;renderMemorize();">' + escapeHTML(t) + '</span>'; }).join('') +
+      '</div>' +
+      paginationHTML +
+      '<div id="memoList">' + renderMemoList(pageQs) + '</div>' +
+      paginationHTML +
+    '</div>';
 }
 
 function renderMemoList(questions) {
@@ -1254,6 +1281,7 @@ function startTestChapter(ciOrName, sectionFilter) {
   let qs = sectionFilter ? ch.questions.filter(q => q.section === sectionFilter) : ch.questions;
   appState._testQuestions = qs;
   appState._testChapter = typeof ciOrName === 'number' ? ciOrName : chapters.findIndex(function(c) { return c.name === ciOrName; });
+  appState._testSection = sectionFilter || null;
   const progress = getTestProgress();
   const startIdx = sectionFilter ? 0 : (progress[ch.name] || 0);
   renderTestQuestion(Math.min(startIdx, qs.length - 1));
@@ -1393,8 +1421,8 @@ function checkTestAnswer(idx) {
 
 function nextTestQuestion(idx) {
   const qs = appState._testQuestions;
-  // Save progress (skip for wrong-book practice: _testChapter === -1)
-  if (appState._testChapter !== -1) {
+  // Save progress (skip for wrong-book practice and section-filtered practice)
+  if (appState._testChapter !== -1 && !appState._testSection) {
     const chName = qs[idx].chapter;
     setTestProgress(chName, idx + 1);
   }
@@ -1459,7 +1487,7 @@ function renderWrongList(questions) {
       <div class="q-body">${escapeHTML(q.content)}</div>
       ${q.options && q.options.length ? `<div style="margin:8px 0;font-size:14px;">${q.options.map(o => `<span style="margin-right:12px;">${escapeHTML(o.label)}. ${escapeHTML(o.text)}</span>`).join('')}</div>` : ''}
       <div class="q-ans">${renderAnswerWithWarning(q)}</div>
-      <button class="btn btn-sm btn-ok" onclick="removeWrong('${escapeOnclick(qid(q))}');renderWrongBook();" style="margin-top:8px;">移出错题本</button>
+      <button class="btn btn-sm btn-ok" onclick="if(confirm('确定移出这道错题吗？')){removeWrong('${escapeOnclick(qid(q))}');renderWrongBook();}" style="margin-top:8px;">移出错题本</button>
       ${renderFeedbackInline(q)}
     </div>`).join('');
 }
@@ -1482,6 +1510,7 @@ function startWrongPractice() {
   appState._testUserAns = null;
   appState._testSubjAns = '';
   appState._testChapter = -1;
+  appState._testSection = null;
   renderTestQuestion(0);
 }
 
