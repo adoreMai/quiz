@@ -336,7 +336,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.7';
+const VERSION = '2.4.8';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1738,12 +1738,29 @@ function b64ToUtf8(str) {
 }
 
 async function exportData() {
-  var payload = {};
-  var keys = ['quiz_app_data', 'quiz_current_subject', 'quiz_version'];
-  for (var i = 0; i < keys.length; i++) {
-    var v = localStorage.getItem(keys[i]);
-    if (v !== null) payload[keys[i]] = v;
+  var appData = loadLS();
+  var compact = {};
+  // wrongBook: strip full question objects to just {t: type} (qid is the key)
+  if (appData.wrongBook) {
+    var w = {};
+    Object.keys(appData.wrongBook).forEach(function(k) {
+      var q = appData.wrongBook[k];
+      w[k] = {t: q.type || ''};
+    });
+    compact.w = w;
   }
+  if (appData.testProgress) compact.p = appData.testProgress;
+  if (appData.examHistory) {
+    compact.h = appData.examHistory.map(function(h) {
+      return {dt: h.date, s: h.score, c: h.correct, t: h.total, m: h.time, d: h.detail};
+    });
+  }
+  var payload = {};
+  payload.d = JSON.stringify(compact);
+  var subj = localStorage.getItem('quiz_current_subject');
+  if (subj !== null) payload.u = subj;
+  var ver = localStorage.getItem('quiz_version');
+  if (ver !== null) payload.v = ver;
   var json = JSON.stringify(payload);
   var encoded;
   if (typeof CompressionStream !== 'undefined') {
@@ -1755,7 +1772,10 @@ async function exportData() {
   ta.value = encoded;
   var btn = document.getElementById('copyExportBtn');
   btn.style.display = 'inline-block';
-  toast('导出数据已生成' + (typeof CompressionStream !== 'undefined' ? '（已压缩）' : '') + '，点击「复制到剪贴板」');
+  var oldSize = JSON.stringify(appData).length;
+  var newSize = json.length;
+  var pct = Math.round((1 - newSize / oldSize) * 100);
+  toast('导出数据已生成' + (typeof CompressionStream !== 'undefined' ? '（已压缩）' : '') + '，体积减少约 ' + pct + '%');
 }
 
 function copyExport() {
@@ -1778,7 +1798,6 @@ async function importData() {
   try {
     json = await decompressFromB64(raw);
   } catch(e) {
-    // Last-resort fallback: try old uncompressed format
     try { json = b64ToUtf8(raw); } catch(e2) {
       toast('数据格式无效，请检查是否完整复制'); return;
     }
@@ -1790,26 +1809,77 @@ async function importData() {
     toast('数据解析失败，请检查是否完整复制'); return;
   }
   if (!payload || typeof payload !== 'object') { toast('数据内容无效'); return; }
-  if (!payload.quiz_app_data && !payload.quiz_current_subject) { toast('未识别到有效数据，请检查内容'); return; }
-  var imported = 0;
-  var keys = Object.keys(payload);
-  for (var i = 0; i < keys.length; i++) {
-    var k = keys[i];
-    if (k.indexOf('quiz_') !== 0) continue;
-    if (k === 'quiz_app_data') {
-      try {
-        var remote = JSON.parse(payload[k]);
-        var local = {};
-        try { local = JSON.parse(localStorage.getItem(k) || '{}'); } catch(e) {}
-        var merged = mergeDeep(local, remote);
-        localStorage.setItem(k, JSON.stringify(merged));
-      } catch(e) { localStorage.setItem(k, payload[k]); }
-    } else {
-      localStorage.setItem(k, payload[k]);
-    }
-    imported++;
+
+  // Build qid->question lookup from current question bank
+  var qLookup = {};
+  if (questionBank) {
+    questionBank.forEach(function(q) { qLookup[qid(q)] = q; });
   }
-  if (imported === 0) { toast('未识别到有效数据'); return; }
+
+  var imported = 0;
+
+  // New compact format: {d, u, v}
+  if (payload.d) {
+    try {
+      var compact = JSON.parse(payload.d);
+      var local = loadLS();
+
+      // Expand wrongBook from {qid: {t}} back to full question objects
+      if (compact.w) {
+        var fullWB = {};
+        Object.keys(compact.w).forEach(function(k) {
+          if (qLookup[k]) {
+            fullWB[k] = qLookup[k];
+          } else {
+            // Question removed from bank — build stub from qid
+            var parts = k.split('|');
+            fullWB[k] = {
+              chapter: parts[0] || '',
+              section: parts[1] || '',
+              index: parseInt(parts[2]) || 0,
+              type: compact.w[k].t || '',
+              content: '(题目数据已从题库移除)',
+              answer: '',
+              options: []
+            };
+          }
+        });
+        compact.wrongBook = fullWB;
+        delete compact.w;
+      }
+      if (compact.p) { compact.testProgress = compact.p; delete compact.p; }
+      if (compact.h) {
+        compact.examHistory = compact.h.map(function(h) {
+          return {date: h.dt, score: h.s, correct: h.c, total: h.t, time: h.m, detail: h.d};
+        });
+        delete compact.h;
+      }
+
+      var merged = mergeDeep(local, compact);
+      saveLS(merged);
+      imported++;
+    } catch(e) {
+      toast('数据解析失败: ' + e.message); return;
+    }
+  }
+  // Old format: quiz_app_data with full wrongBook objects
+  else if (payload.quiz_app_data) {
+    try {
+      var remote = JSON.parse(payload.quiz_app_data);
+      var local = loadLS();
+      var merged = mergeDeep(local, remote);
+      saveLS(merged);
+      imported++;
+    } catch(e) { localStorage.setItem('quiz_app_data', payload.quiz_app_data); imported++; }
+  }
+
+  // Restore subject & version
+  if (payload.u) { localStorage.setItem('quiz_current_subject', payload.u); imported++; }
+  else if (payload.quiz_current_subject) { localStorage.setItem('quiz_current_subject', payload.quiz_current_subject); imported++; }
+  if (payload.v) { localStorage.setItem('quiz_version', payload.v); imported++; }
+  else if (payload.quiz_version) { localStorage.setItem('quiz_version', payload.quiz_version); imported++; }
+
+  if (imported === 0) { toast('未识别到有效数据，请检查内容'); return; }
   toast('导入成功！已合并 ' + imported + ' 项数据，页面即将刷新...');
   setTimeout(function() { location.reload(); }, 1500);
 }
