@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.5';
+const VERSION = '2.4.6';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1048,12 +1048,15 @@ function enableTFClicks(idx) {
   $$('.opt-item').forEach(item => {
     item.addEventListener('click', () => {
       appState.examAnswers[idx] = item.dataset.label;
-      const block = item.closest('.q-block');
+      var block = item.closest('.q-block');
       if (!block) return;
-      block.innerHTML = block.innerHTML.replace(/opt-radio checked/g, 'opt-radio').replace(/opt-item selected/g, 'opt-item');
-      item.classList.add('selected');
-      const radio = item.querySelector('.opt-radio');
-      if (radio) radio.classList.add('checked');
+      var scrollTop = window.scrollY;
+      // Find the question to get its content for re-render
+      var q = appState.examQuestions[idx];
+      var qContent = escapeHTML(q.content);
+      block.innerHTML = '<div class=\"q-content\">' + qContent + '</div>' + renderTFOptions(appState.examAnswers[idx]) + (typeof renderFeedbackInline === 'function' ? renderFeedbackInline(q) : '');
+      enableTFClicks(idx);
+      window.scrollTo(0, scrollTop);
     });
   });
 }
