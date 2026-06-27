@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.3';
+const VERSION = '2.4.4';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -426,6 +426,25 @@ function renderAnswerWithWarning(q) {
 }
 function getTestProgress() { const d=loadLS(); return d.testProgress||{}; }
 function setTestProgress(chapter, idx) { const d=loadLS(); if(!d.testProgress) d.testProgress={}; d.testProgress[chapter]=idx; saveLS(d); }
+var _testProgressPending = null;
+var _testProgressLast = null;
+var _testProgressTimer = null;
+function setTestProgressDebounced(chapter, idx) {
+  // Store latest values in memory only
+  _testProgressLast = { chapter: chapter, idx: idx };
+  if (!_testProgressPending) {
+    // First call: save immediately, then debounce subsequent calls
+    setTestProgress(chapter, idx);
+    _testProgressPending = true;
+  }
+  clearTimeout(_testProgressTimer);
+  _testProgressTimer = setTimeout(function() {
+    if (_testProgressLast) setTestProgress(_testProgressLast.chapter, _testProgressLast.idx);
+    _testProgressPending = false;
+    _testProgressLast = null;
+    _testProgressTimer = null;
+  }, 600);
+}
 function getExamHistory() { const d=loadLS(); return d.examHistory||[]; }
 function addExamHistory(record) { const d=loadLS(); if(!d.examHistory) d.examHistory=[]; d.examHistory.unshift(record); if(d.examHistory.length>20) d.examHistory.pop(); saveLS(d); }
 
@@ -1324,6 +1343,13 @@ function renderTestQuestion(idx) {
       </div>
       <div class="nav-row">
         <button class="btn" onclick="renderTestQuestion(${idx-1})" ${idx===0?'disabled':''}>上一题</button>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <input type="number" id="testJumpInput" value="${idx+1}" min="1" max="${qs.length}"
+            style="width:48px;text-align:center;border:1px solid var(--border);border-radius:4px;padding:6px 2px;font-size:14px;"
+            onkeydown="if(event.key==='Enter')jumpToTestQuestion(this.value)"
+            title="输入题号跳转">
+          <span style="font-size:13px;color:var(--text2);">/ ${qs.length}</span>
+        </div>
         <div>
           ${!appState._testShowAns ? `<button class="btn btn-primary" onclick="checkTestAnswer(${idx})">确认</button>` : ''}
           <button class="btn btn-primary" onclick="nextTestQuestion(${idx})">${idx<qs.length-1?'下一题':'完成'}</button>
@@ -1454,13 +1480,31 @@ function nextTestQuestion(idx) {
   // Save progress (skip for wrong-book practice and section-filtered practice)
   if (appState._testChapter !== -1 && !appState._testSection) {
     var chName = qs[idx].chapter;
-    setTestProgress(chName, idx + 1);
+    setTestProgressDebounced(chName, idx + 1);
   }
   // Reset answer state
   appState._testShowAns = false;
   appState._testUserAns = null;
   appState._testSubjAns = '';
   renderTestQuestion(idx + 1);
+}
+
+function jumpToTestQuestion(inputVal) {
+  var idx = parseInt(inputVal) - 1;
+  var qs = appState._testQuestions;
+  if (isNaN(idx) || idx < 0 || idx >= qs.length) {
+    toast('请输入有效题号（1-' + qs.length + '）');
+    return;
+  }
+  // Save current progress before jumping
+  if (appState._testChapter !== -1 && !appState._testSection) {
+    setTestProgressDebounced(qs[0].chapter, idx + 1);
+  }
+  // Reset answer state for the new question
+  appState._testShowAns = false;
+  appState._testUserAns = null;
+  appState._testSubjAns = '';
+  renderTestQuestion(idx);
 }
 
 function resetTestProgress(chapterName) {
