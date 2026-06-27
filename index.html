@@ -269,6 +269,7 @@ footer a { color:var(--text2); }
     <div id="changelogContent" style="font-size:14px;line-height:1.8;overflow-y:auto;flex:1;min-height:0;">
       <p style="text-align:center;color:var(--text3);padding:20px;">加载中...</p>
     </div>
+    <div id="changelogNav" style="display:none;justify-content:center;align-items:center;gap:8px;padding:10px 0 4px;flex-shrink:0;"></div>
     <button class="btn" onclick="document.getElementById('changelogModal').classList.remove('show')" style="margin:12px auto 0;display:block;flex-shrink:0;">关闭</button>
   </div>
 </div>
@@ -335,7 +336,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.6';
+const VERSION = '2.4.7';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -1836,19 +1837,117 @@ function mergeDeep(target, source) {
 // ============================================================
 // CHANGELOG (dynamic load from CHANGELOG.md)
 // ============================================================
-let changelogLoaded = false;
+var changelogLoaded = false;
+var changelogHeader = '';
+var changelogBlocks = [];
+var changelogPage = 0;
+var CHANGELOG_PER_PAGE = 5;
+
 function loadChangelog() {
   if (changelogLoaded) return;
   changelogLoaded = true;
   fetch('CHANGELOG.md?v=' + VERSION)
-    .then(r => { if (!r.ok) throw Error(r.status); return r.text(); })
-    .then(md => { document.getElementById('changelogContent').innerHTML = parseChangelogMD(md); })
-    .catch(() => { document.getElementById('changelogContent').innerHTML = '<p style="text-align:center;color:var(--text3);">加载失败，请前往 <a href="https://github.com/adoreMai/quiz/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">GitHub</a> 查看</p>'; });
+    .then(function(r) { if (!r.ok) throw Error(r.status); return r.text(); })
+    .then(function(md) {
+      var parts = splitChangelog(md);
+      changelogHeader = parseChangelogBlock(parts.header);
+      changelogBlocks = parts.blocks.map(function(b) { return parseChangelogBlock(b); });
+      changelogPage = 0;
+      renderChangelogPage();
+    })
+    .catch(function() {
+      document.getElementById('changelogContent').innerHTML = '<p style="text-align:center;color:var(--text3);">加载失败，请前往 <a href="https://github.com/adoreMai/quiz/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" style="color:var(--accent);">GitHub</a> 查看</p>';
+    });
+}
+
+function splitChangelog(md) {
+  var lines = md.split('\n');
+  var headerLines = [];
+  var blocks = [];
+  var current = null;
+  var inHeader = true;
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (inHeader && /^##\s+v\d/.test(line)) {
+      inHeader = false;
+    }
+    if (inHeader) {
+      headerLines.push(line);
+    } else {
+      if (/^##\s+v\d/.test(line)) {
+        if (current) blocks.push(current);
+        current = [line];
+      } else {
+        if (current !== null) current.push(line);
+      }
+    }
+  }
+  if (current && current.length) blocks.push(current);
+  return { header: headerLines.join('\n'), blocks: blocks.map(function(b) { return b.join('\n'); }) };
+}
+
+function parseChangelogBlock(md) {
+  var lines = md.split('\n');
+  var h = '', inList = 0;
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (/^#\s/.test(line) && !/^##/.test(line)) continue;
+    if (/^---\s*$/.test(line.trim())) { while (inList > 0) { h += '</ul>'; inList--; } continue; }
+    var vm = line.match(/^##\s+(.+)/);
+    if (vm) { while (inList > 0) { h += '</ul>'; inList--; } h += '<h3 style="font-size:16px;margin:16px 0 8px;">' + parseInline(vm[1]) + '</h3>'; continue; }
+    var cm = line.match(/^###\s+(.+)/);
+    if (cm) { while (inList > 0) { h += '</ul>'; inList--; } h += '<h4 style="font-size:13px;color:var(--text3);margin:10px 0 4px;">' + parseInline(cm[1]) + '</h4>'; continue; }
+    var lm = line.match(/^(\s*)-\s+(.*)/);
+    if (lm) {
+      var level = Math.floor(lm[1].length / 2) + 1;
+      var text = parseInline(lm[2]);
+      while (inList < level) { h += '<ul style="padding-left:20px;color:var(--text2);">'; inList++; }
+      while (inList > level) { h += '</ul>'; inList--; }
+      h += '<li>' + text + '</li>';
+      continue;
+    }
+    if (line.trim() === '') { while (inList > 0) { h += '</ul>'; inList--; } continue; }
+    while (inList > 0) { h += '</ul>'; inList--; }
+    h += '<p style="color:var(--text2);">' + parseInline(line) + '</p>';
+  }
+  while (inList > 0) { h += '</ul>'; inList--; }
+  return h;
+}
+
+function renderChangelogPage() {
+  var totalPages = Math.ceil(changelogBlocks.length / CHANGELOG_PER_PAGE);
+  var start = changelogPage * CHANGELOG_PER_PAGE;
+  var end = Math.min(start + CHANGELOG_PER_PAGE, changelogBlocks.length);
+  var html = changelogHeader;
+  html += '<hr style="border:none;border-top:1px solid var(--border);margin:12px 0;">';
+  for (var i = start; i < end; i++) {
+    html += changelogBlocks[i];
+  }
+  document.getElementById('changelogContent').innerHTML = html;
+
+  var navHtml = '';
+  if (totalPages > 1) {
+    navHtml += '<button class="btn" onclick="changelogPrevPage()" style="font-size:12px;padding:4px 10px;"' + (changelogPage === 0 ? ' disabled' : '') + '>上一页</button>';
+    navHtml += '<span style="font-size:13px;color:var(--text2);">' + (changelogPage + 1) + ' / ' + totalPages + '</span>';
+    navHtml += '<button class="btn" onclick="changelogNextPage()" style="font-size:12px;padding:4px 10px;"' + (changelogPage >= totalPages - 1 ? ' disabled' : '') + '>下一页</button>';
+  }
+  var nav = document.getElementById('changelogNav');
+  nav.innerHTML = navHtml;
+  nav.style.display = totalPages > 1 ? 'flex' : 'none';
+
+  document.getElementById('changelogContent').scrollTop = 0;
+}
+
+function changelogPrevPage() {
+  if (changelogPage > 0) { changelogPage--; renderChangelogPage(); }
+}
+function changelogNextPage() {
+  var totalPages = Math.ceil(changelogBlocks.length / CHANGELOG_PER_PAGE);
+  if (changelogPage < totalPages - 1) { changelogPage++; renderChangelogPage(); }
 }
 
 function parseInline(s) {
   s = escH(s);
-  // extract code spans first so bold/link regex won't match inside them
   var parts = s.split(/(`[^`]+`)/g);
   for (var i = 0; i < parts.length; i++) {
     if (parts[i].startsWith('`') && parts[i].endsWith('`')) {
@@ -1861,41 +1960,8 @@ function parseInline(s) {
   return parts.join('');
 }
 
-function parseChangelogMD(md) {
-  const lines = md.split('\n');
-  let h = '', inList = 0;
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    // skip top-level title
-    if (/^#\s/.test(line) && !/^##/.test(line)) continue;
-    // horizontal rule
-    if (/^---\s*$/.test(line.trim())) { while (inList > 0) { h += '</ul>'; inList--; } continue; }
-    // version heading
-    let vm = line.match(/^##\s+(.+)/);
-    if (vm) { while (inList > 0) { h += '</ul>'; inList--; } h += '<h3 style="font-size:16px;margin:16px 0 8px;">' + parseInline(vm[1]) + '</h3>'; continue; }
-    // category heading
-    let cm = line.match(/^###\s+(.+)/);
-    if (cm) { while (inList > 0) { h += '</ul>'; inList--; } h += '<h4 style="font-size:13px;color:var(--text3);margin:10px 0 4px;">' + parseInline(cm[1]) + '</h4>'; continue; }
-    // list item
-    let lm = line.match(/^(\s*)-\s+(.*)/);
-    if (lm) {
-      let level = Math.floor(lm[1].length / 2) + 1;
-      let text = parseInline(lm[2]);
-      while (inList < level) { h += '<ul style="padding-left:20px;color:var(--text2);">'; inList++; }
-      while (inList > level) { h += '</ul>'; inList--; }
-      h += '<li>' + text + '</li>';
-      continue;
-    }
-    // blank line
-    if (line.trim() === '') { while (inList > 0) { h += '</ul>'; inList--; } continue; }
-    // other text
-    while (inList > 0) { h += '</ul>'; inList--; }
-    h += '<p style="color:var(--text2);">' + parseInline(line) + '</p>';
-  }
-  while (inList > 0) { h += '</ul>'; inList--; }
-  return h;
-}
 function escH(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 
 // ============================================================
 // INIT
