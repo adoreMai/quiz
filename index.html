@@ -335,7 +335,7 @@ footer a { color:var(--text2); }
 // ============================================================
 // CONFIG
 // ============================================================
-const VERSION = '2.4.4';
+const VERSION = '2.4.5';
 const SUBJECTS_URL = 'subjects.json';
 const REPO_ISSUES_URL = 'https://github.com/adoreMai/quiz/issues/new';
 const DEFAULT_COUNTS = { '单选题': 30, '多选题': 10, '判断题': 10 };
@@ -583,6 +583,22 @@ async function loadQuestionBank(url) {
     var hasPrefix = flat.some(function(q) { var c = q.content; return c.startsWith('** ') || c.startsWith('* '); });
     document.getElementById('prefixLegend').style.display = hasPrefix ? '' : 'none';
     document.getElementById('main').innerHTML = '';
+    // Migrate test progress: cap to actual chapter question counts (handles dedup etc.)
+    try {
+      var d = loadLS();
+      if (d.testProgress) {
+        var chCounts = {};
+        questionBank.forEach(function(q) { chCounts[q.chapter] = (chCounts[q.chapter] || 0) + 1; });
+        var migrated = false;
+        for (var ch in d.testProgress) {
+          if (chCounts[ch] && d.testProgress[ch] > chCounts[ch]) {
+            d.testProgress[ch] = chCounts[ch];
+            migrated = true;
+          }
+        }
+        if (migrated) saveLS(d);
+      }
+    } catch(e) {}
     switchMode('exam');
     return true;
   } catch (e) {
